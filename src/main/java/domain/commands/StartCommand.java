@@ -1,17 +1,22 @@
 package domain.commands;
 
+import domain.model.CommandType;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Chat;
-import org.telegram.telegrambots.meta.api.objects.User;
-import org.telegram.telegrambots.meta.bots.AbsSender;
 
-public class StartCommand extends BotCommand {
+public class StartCommand implements Command {
+    private CommandType type = CommandType.START;
 
-    public StartCommand(String command, String description) {
-        super(command, description);
+    public StartCommand() { }
+
+    public SendMessage execute(String[] args) {
+        return null;
     }
 
-    public void execute() {
-        //TODO: Add command body [23/01/20]
+    public String getCommand() {
+        return type.getCommand();
+    }
+
+    public String getDescription() {
+        return type.getDescription();
     }
 }

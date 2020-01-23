@@ -1,7 +1,6 @@
-package domain;
+package domain.model;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggerFactory;
 
 public class YandexTranslator implements Translator {
 
