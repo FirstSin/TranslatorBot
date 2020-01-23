@@ -6,7 +6,7 @@ import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-abstract class BotCommand {
+public abstract class BotCommand {
 
     protected final Logger logger = Logger.getLogger(BotCommand.class);
 
