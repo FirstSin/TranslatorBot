@@ -1,7 +1,8 @@
 package domain.model;
 
+import domain.utils.Handler;
 import domain.utils.CommandHandler;
-import domain.utils.CommandHandlerImpl;
+import domain.utils.TextHandler;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -16,14 +17,14 @@ import java.util.Properties;
 public class TranslatorBot extends TelegramLongPollingBot {
 
     private static final Logger logger = Logger.getLogger(TranslatorBot.class);
-    private CommandHandler commandHandler;
+    private Handler commandHandler;
     private String username;
     private String token;
     private static TranslatorBot translatorBot;
 
     private TranslatorBot() {
         setBotProperties();
-        commandHandler = new CommandHandlerImpl();
+        commandHandler = new CommandHandler();
     }
 
     public static TranslatorBot getInstance(){
@@ -53,7 +54,7 @@ public class TranslatorBot extends TelegramLongPollingBot {
             if (isCommand) {
                 answer = commandHandler.handle(update);
             } else {
-                answer = null;
+                answer = new TextHandler().handle(update);
             }
 
             try {

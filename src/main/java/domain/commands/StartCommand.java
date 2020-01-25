@@ -8,7 +8,7 @@ public class StartCommand implements Command {
 
     public StartCommand() { }
 
-    public SendMessage execute(String[] args) {
+    public String execute(String[] args) {
         return null;
     }
 

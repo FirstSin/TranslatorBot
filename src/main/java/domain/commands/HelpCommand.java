@@ -8,17 +8,15 @@ public class HelpCommand implements Command {
 
     public HelpCommand() { }
 
-    public SendMessage execute(String[] args) {
+    public String execute(String[] args) {
         CommandType[] commands = CommandType.values();
         StringBuilder answer = new StringBuilder();
-        answer.append("<b>Available commands:</b>\n\n");
+        answer.append("<b>Available commands:</b>\n");
         for (CommandType type : commands) {
             answer.append("/" + type.getCommand() + " - " + type.getDescription() + "\n");
         }
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setText(answer.toString());
-        sendMessage.setParseMode("HTML");
-        return sendMessage;
+
+        return answer.toString();
     }
 
     public String getCommand() {
