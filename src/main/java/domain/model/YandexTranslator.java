@@ -6,21 +6,29 @@ import org.apache.log4j.Logger;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.DataOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Properties;
 import java.util.Scanner;
 import java.util.StringJoiner;
 
 public class YandexTranslator implements Translator {
-    private static String url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200120T161024Z.0566c83424841626.01db529eb075540df894f785100a788bd322381a";
+    private static String url;
+    private static String key;
     private static final Logger logger = Logger.getLogger(YandexTranslator.class);
+
+    public YandexTranslator() {
+        if(url == null || key == null)
+            setProperties();
+    }
 
     @Override
     public String translate(String message, String lang) throws IOException {
-        URL urlObj = new URL(url);
+        URL urlObj = new URL(url + "translate?key=" + key);
         HttpsURLConnection connection = (HttpsURLConnection) urlObj.openConnection();
         connection.setRequestMethod("POST");
         connection.setDoOutput(true);
@@ -45,5 +53,16 @@ public class YandexTranslator implements Translator {
                 .add(", lang:").add(message.getLang())
                 .add(", text:").add(message.getText()));
         return message.getText();
+    }
+
+    private void setProperties() {
+        try (InputStream in = new FileInputStream("src/main/resources/translator.properties")) {
+            Properties prop = new Properties();
+            prop.load(in);
+            url = prop.getProperty("url");
+            key = prop.getProperty("key");
+        } catch (IOException e) {
+            logger.error("An error occurred while loading properties: " + e.getMessage(), e);
+        }
     }
 }
