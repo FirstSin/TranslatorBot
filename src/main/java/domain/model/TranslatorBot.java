@@ -17,14 +17,12 @@ import java.util.Properties;
 public class TranslatorBot extends TelegramLongPollingBot {
 
     private static final Logger logger = Logger.getLogger(TranslatorBot.class);
-    private Handler commandHandler;
     private String username;
     private String token;
     private static TranslatorBot translatorBot;
 
     private TranslatorBot() {
         setBotProperties();
-        commandHandler = new CommandHandler();
     }
 
     public static TranslatorBot getInstance(){
@@ -48,24 +46,23 @@ public class TranslatorBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         boolean isNonNull = update.getMessage().getText() != null;
         if (update.hasMessage() && isNonNull) {
-            BotApiMethod answer;
+            BotApiMethod response;
             boolean isCommand = update.getMessage().getText().startsWith("/");
 
             if (isCommand) {
-                answer = commandHandler.handle(update);
+                Handler handler = CommandHandler.getInstance();
+                response = handler.handle(update);
             } else {
-                answer = new TextHandler().handle(update);
+                Handler handler = TextHandler.getInstance();
+                response = handler.handle(update);
             }
 
             try {
-                execute(answer);
+                execute(response);
             } catch (TelegramApiException e) {
                 logger.error("Problems with execution:\n" + e);
             }
         }
-
-        //TODO: send translate message [22/01/20]
-        //TODO: make a non-command text handler [23/01/20]
     }
 
     @Override

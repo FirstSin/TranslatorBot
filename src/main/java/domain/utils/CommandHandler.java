@@ -12,7 +12,18 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 public class CommandHandler implements Handler {
 
     private static final Logger logger = Logger.getLogger(CommandHandler.class);
-    private CommandFactory factory = new CommandFactory();
+    private CommandFactory factory;
+    private static Handler commandHandler;
+
+    private CommandHandler() {
+        factory = new CommandFactory();
+    }
+
+    public static Handler getInstance(){
+        if(commandHandler == null)
+            commandHandler = new CommandHandler();
+        return commandHandler;
+    }
 
     @Override
     public BotApiMethod handle(Update update) {

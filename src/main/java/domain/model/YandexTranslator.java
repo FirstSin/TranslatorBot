@@ -24,13 +24,15 @@ public class YandexTranslator implements Translator {
         HttpsURLConnection connection = (HttpsURLConnection) urlObj.openConnection();
         connection.setRequestMethod("POST");
         connection.setDoOutput(true);
-        DataOutputStream dataOutputStream = new DataOutputStream(connection.getOutputStream());
-        dataOutputStream.writeBytes(new StringJoiner("")
+        DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+        out.writeBytes(new StringJoiner("")
                 .add("text=").add(URLEncoder.encode(message, "UTF-8"))
                 .add("&lang=").add(lang).toString());
         InputStream response = connection.getInputStream();
         String json = new Scanner(response).nextLine();
         String text = getTranslatedText(json);
+        out.close();
+        response.close();
         return text;
     }
 
