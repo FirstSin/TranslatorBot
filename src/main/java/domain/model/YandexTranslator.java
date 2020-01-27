@@ -1,7 +1,6 @@
 package domain.model;
 
 import com.google.gson.Gson;
-import com.google.inject.internal.asm.$ClassTooLargeException;
 import org.apache.log4j.Logger;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -9,9 +8,7 @@ import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
+import java.net.*;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.StringJoiner;
@@ -22,7 +19,7 @@ public class YandexTranslator implements Translator {
     private static final Logger logger = Logger.getLogger(YandexTranslator.class);
 
     public YandexTranslator() {
-        if(url == null || key == null)
+        if (url == null || key == null)
             setProperties();
     }
 
@@ -38,13 +35,13 @@ public class YandexTranslator implements Translator {
                 .add("&lang=").add(lang).toString());
         InputStream response = connection.getInputStream();
         String json = new Scanner(response).nextLine();
-        String text = getTranslatedText(json);
+        String text = getTextFromJson(json);
         out.close();
         response.close();
         return text;
     }
 
-    private String getTranslatedText(String json) {
+    private String getTextFromJson(String json) {
         Gson gson = new Gson();
         Message message = gson.fromJson(json, Message.class);
         logger.debug(new StringJoiner(" ")

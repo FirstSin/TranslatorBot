@@ -35,8 +35,7 @@ public class TextHandler implements Handler {
             logger.error("An error occurred while translating the text", e);
         }
         SendMessage sendMessage = new SendMessage();
-        sendMessage.setText(response);
-        sendMessage.setChatId(chatId);
+        sendMessage.setText(response).setChatId(chatId);
         return sendMessage;
     }
 }
