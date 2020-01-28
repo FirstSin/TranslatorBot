@@ -10,23 +10,23 @@ import java.util.List;
 public class UserService {
     private UserDao userDao = new UserDaoImpl();
 
-    User findUser(int id) throws DAOException {
+    public User findUser(int id) throws DAOException {
         return userDao.findById(id);
     }
 
-    void saveUser(User user) throws DAOException{
+    public void saveUser(User user) throws DAOException{
         userDao.save(user);
     }
 
-    void updateUser(User user) throws DAOException{
+    public void updateUser(User user) throws DAOException{
         userDao.update(user);
     }
 
-    void deleteUser(User user) throws DAOException{
+    public void deleteUser(User user) throws DAOException{
         userDao.delete(user);
     }
 
-    List<User> findAllUsers() throws DAOException{
+    public List<User> findAllUsers() throws DAOException{
         return userDao.findAll();
     }
 }

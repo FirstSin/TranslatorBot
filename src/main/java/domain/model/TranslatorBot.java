@@ -1,5 +1,6 @@
 package domain.model;
 
+import dao.exceptions.DAOException;
 import domain.utils.Handler;
 import domain.utils.CommandHandler;
 import domain.utils.TextHandler;
@@ -46,15 +47,23 @@ public class TranslatorBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         boolean isNonNull = update.getMessage().getText() != null;
         if (update.hasMessage() && isNonNull) {
-            BotApiMethod response;
+            BotApiMethod response = null;
             boolean isCommand = update.getMessage().getText().startsWith("/");
 
             if (isCommand) {
                 Handler handler = CommandHandler.getInstance();
-                response = handler.handle(update);
+                try {
+                    response = handler.handle(update);
+                } catch (DAOException e) {
+                    e.printStackTrace();
+                }
             } else {
                 Handler handler = TextHandler.getInstance();
-                response = handler.handle(update);
+                try {
+                    response = handler.handle(update);
+                } catch (DAOException e) {
+                    e.printStackTrace();
+                }
             }
 
             try {

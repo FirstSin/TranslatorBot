@@ -1,12 +1,13 @@
 package domain.utils;
 
-import com.google.common.base.Joiner;
+import dao.exceptions.DAOException;
+import domain.commands.Command;
 import domain.exceptions.CommandNotFoundException;
 import domain.model.CommandType;
-import domain.commands.Command;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 public class CommandHandler implements Handler {
@@ -26,19 +27,19 @@ public class CommandHandler implements Handler {
     }
 
     @Override
-    public BotApiMethod handle(Update update) {
-        int userId = update.getMessage().getFrom().getId();
-        long chatId = update.getMessage().getChatId();
-        String message = update.getMessage().getText();
+    public BotApiMethod handle(Update update) throws DAOException {
+        Message message = update.getMessage();
+        long chatId = message.getChatId();
+        String text = message.getText();
         CommandType type = null;
         try {
-            type = defineCommandType(message);
+            type = defineCommandType(text);
         } catch (CommandNotFoundException e) {
-            logger.error("An error occurred while defining the command: " + e + " User message: " + message);
+            logger.error("An error occurred while defining the command: " + e + " User message: " + text);
         }
         Command command = factory.getCommand(type);
-        String[] args = getCommandArgs(message);
-        String commandAnswer = command.execute(args);
+        String[] args = getCommandArgs(text);
+        String commandAnswer = command.execute(message, args);
         SendMessage response = new SendMessage();
         response.setText(commandAnswer);
         response.setChatId(chatId);
@@ -60,7 +61,7 @@ public class CommandHandler implements Handler {
     private String[] getCommandArgs(String message) {
         if (message.split(" ").length < 2)
             return null;
-        String arguments = message.substring(message.indexOf(" " + 1));
+        String arguments = message.substring(message.indexOf(" ")+1);
         String[] args = arguments.split(" ");
         return args;
     }

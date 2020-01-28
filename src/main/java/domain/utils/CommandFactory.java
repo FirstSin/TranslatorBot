@@ -1,9 +1,7 @@
 package domain.utils;
 
+import domain.commands.*;
 import domain.model.CommandType;
-import domain.commands.Command;
-import domain.commands.HelpCommand;
-import domain.commands.StartCommand;
 
 import javax.validation.constraints.NotNull;
 
@@ -16,6 +14,12 @@ public class CommandFactory {
                 break;
             case HELP:
                 command = new HelpCommand();
+                break;
+            case BOTLANG:
+                command = new BotLangCommand();
+                break;
+            case SETBOTLANG:
+                command = new SetBotLangCommand();
                 break;
             default:
                 throw new AssertionError("The passed command type was not found");
