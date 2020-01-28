@@ -1,5 +1,8 @@
 package domain.utils;
 
+import dao.exceptions.DAOException;
+import dao.services.BotUserService;
+import domain.model.BotUser;
 import domain.model.Translator;
 import domain.model.YandexTranslator;
 import org.apache.log4j.Logger;
@@ -13,6 +16,7 @@ public class TextHandler implements Handler {
     private static final Logger logger = Logger.getLogger(TextHandler.class);
     private static Handler textHandler;
     private Translator translator;
+    private BotUserService userService = new BotUserService();
 
     private TextHandler() {
         translator = new YandexTranslator();
@@ -30,12 +34,17 @@ public class TextHandler implements Handler {
         String message = update.getMessage().getText();
         String response = null;
         try {
-            response = translator.translate(message, "ru");
-        } catch (IOException e) {
+            response = translator.translate(message, getTranslationLang(update));
+        } catch (IOException | DAOException e) {
             logger.error("An error occurred while translating the text", e);
         }
         SendMessage sendMessage = new SendMessage();
         sendMessage.setText(response).setChatId(chatId);
         return sendMessage;
+    }
+
+    private String getTranslationLang(Update update) throws DAOException {
+        BotUser botUser = userService.findUser(update.getMessage().getFrom().getId());
+        return botUser.getTranslationLang();
     }
 }

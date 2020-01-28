@@ -4,7 +4,8 @@ public enum CommandType {
     START("start", "Start using the bot"),
     HELP("help", "Displays a list of all available commands"),
     BOTLANG("botlang", "Displays the language of the bot"),
-    SETBOTLANG("setbotlang", "Changes the language of the bot");
+    SETBOTLANG("setbotlang", "Changes the language of the bot"),
+    TOLANG("tolang", "Set translation language");
 
     private String command;
     private String description;

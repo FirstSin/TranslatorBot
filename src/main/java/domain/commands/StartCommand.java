@@ -1,10 +1,10 @@
 package domain.commands;
 
 import dao.exceptions.DAOException;
-import dao.services.UserService;
+import dao.services.BotUserService;
 import domain.model.CommandType;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import domain.model.BotUser;
 import org.telegram.telegrambots.meta.api.objects.User;
 
 import java.util.Locale;
@@ -12,27 +12,27 @@ import java.util.ResourceBundle;
 
 public class StartCommand implements Command {
     private static final CommandType type = CommandType.START;
-    private UserService userService = new UserService();
+    private BotUserService userService = new BotUserService();
 
     public String execute(Message message, String[] args) throws DAOException {
         User currentUser = message.getFrom();
-        String langCode = currentUser.getLanguageCode();
-        User user = userService.findUser(currentUser.getId());
+        BotUser botUser = userService.findUser(currentUser.getId());
         String response;
         ResourceBundle resourceBundle;
 
-        if (user == null) {
-            userService.saveUser(message.getFrom());
-            resourceBundle = ResourceBundle.getBundle("languages.start", Locale.forLanguageTag(langCode));
+        if (botUser == null) {
+            botUser = new BotUser(currentUser.getId(), currentUser.getFirstName(), currentUser.getLastName(), currentUser.getUserName(), currentUser.getLanguageCode());
+            userService.saveUser(botUser);
+            resourceBundle = ResourceBundle.getBundle("languages.start", Locale.forLanguageTag(botUser.getLanguageCode()));
             response = resourceBundle.getString(
                     "hello") + currentUser.getFirstName() + " " + currentUser.getLastName() + resourceBundle.getString(
                     "firstMeeting") + resourceBundle.getString("introduction");
         } else {
-            langCode = user.getLanguageCode();
-            resourceBundle = ResourceBundle.getBundle("languages.start", Locale.forLanguageTag(langCode));
+            resourceBundle = ResourceBundle.getBundle("languages.start", Locale.forLanguageTag(botUser.getLanguageCode()));
             response = resourceBundle.getString(
                     "hello") + currentUser.getFirstName() + " " + currentUser.getLastName() + resourceBundle.getString(
-                    "anotherMeeting") + resourceBundle.getString("introduction");;
+                    "anotherMeeting") + resourceBundle.getString("introduction");
+            ;
         }
 
         return response;

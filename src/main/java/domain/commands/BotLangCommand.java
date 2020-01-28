@@ -1,7 +1,8 @@
 package domain.commands;
 
 import dao.exceptions.DAOException;
-import dao.services.UserService;
+import dao.services.BotUserService;
+import domain.model.BotUser;
 import domain.model.CommandType;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.User;
@@ -11,13 +12,13 @@ import java.util.ResourceBundle;
 
 public class BotLangCommand implements Command {
     private static final CommandType type = CommandType.BOTLANG;
-    private UserService userService = new UserService();
+    private BotUserService userService = new BotUserService();
 
     @Override
     public String execute(Message message, String[] args) throws DAOException {
-        User user = userService.findUser(message.getFrom().getId());
-        ResourceBundle resBundle = ResourceBundle.getBundle("languages.botlang", Locale.forLanguageTag(user.getLanguageCode()));
-        return resBundle.getString("currentLang") + user.getLanguageCode();
+        BotUser botUser = userService.findUser(message.getFrom().getId());
+        ResourceBundle resBundle = ResourceBundle.getBundle("languages.botlang", Locale.forLanguageTag(botUser.getLanguageCode()));
+        return resBundle.getString("currentLang") + botUser.getLanguageCode();
     }
 
     public String getCommand() {

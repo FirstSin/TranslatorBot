@@ -2,26 +2,26 @@ package dao;
 
 import dao.exceptions.DAOException;
 import dao.utils.DaoFactory;
+import domain.model.BotUser;
 import org.apache.log4j.Logger;
-import org.telegram.telegrambots.meta.api.objects.User;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoImpl implements UserDao {
-    private static final Logger logger = Logger.getLogger(UserDaoImpl.class);
+public class BotUserDaoImpl implements BotUserDao {
+    private static final Logger logger = Logger.getLogger(BotUserDaoImpl.class);
     private DaoFactory daoFactory = DaoFactory.getInstance();
-    private static final String SAVE_USER_QUERY = "INSERT INTO users (user_id, first_name, last_name, user_name, language_code, is_bot) VALUES (?,?,?,?,?,?)";
-    private static final String UPDATE_USER_QUERY = "UPDATE users SET user_id = ?, first_name = ?, last_name = ?, user_name = ?, language_code = ?, is_bot = ?";
+    private static final String SAVE_USER_QUERY = "INSERT INTO users (user_id, first_name, last_name, user_name, language_code, translation_lang) VALUES (?,?,?,?,?,?)";
+    private static final String UPDATE_USER_QUERY = "UPDATE users SET user_id = ?, first_name = ?, last_name = ?, user_name = ?, language_code = ?, translation_lang = ?";
     private static final String DELETE_USER_QUERY = "DELETE FROM users WHERE user_id = ?";
     private static final String SELECT_USER_QUERY = "SELECT * FROM users WHERE user_id = ?";
     private static final String SELECT_ALL_USERS_QUERY = "SELECT * FROM users";
 
     @Override
-    public User findById(int id) throws DAOException {
+    public BotUser findById(int id) throws DAOException {
         logger.trace("Finding user with id " + id);
-        User user = null;
+        BotUser user = null;
         try (Connection connection = daoFactory.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(SELECT_USER_QUERY)) {
                 statement.setInt(1, id);
@@ -40,7 +40,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void save(User user) throws DAOException {
+    public void save(BotUser user) throws DAOException {
         logger.trace("Saving user with id " + user.getId());
         try (Connection connection = daoFactory.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(SAVE_USER_QUERY)) {
@@ -55,7 +55,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void update(User user) throws DAOException {
+    public void update(BotUser user) throws DAOException {
         logger.trace("Updating user with id " + user.getId());
         try (Connection connection = daoFactory.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(UPDATE_USER_QUERY)) {
@@ -70,7 +70,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void delete(User user) throws DAOException {
+    public void delete(BotUser user) throws DAOException {
         logger.trace("Deleting user with id " + user.getId());
         try (Connection connection = daoFactory.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(DELETE_USER_QUERY)) {
@@ -85,14 +85,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findAll() throws DAOException {
+    public List<BotUser> findAll() throws DAOException {
         logger.trace("Finding list of users");
-        List<User> users = new ArrayList<>();
+        List<BotUser> users = new ArrayList<>();
         try (Connection connection = daoFactory.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USERS_QUERY)) {
                 try (ResultSet rs = statement.executeQuery()) {
                     while (rs.next()) {
-                        User user = parseUser(rs);
+                        BotUser user = parseUser(rs);
                         users.add(user);
                     }
                     logger.trace("All users were found");
@@ -105,16 +105,16 @@ public class UserDaoImpl implements UserDao {
         return users;
     }
 
-    private User parseUser(ResultSet rs) throws DAOException {
-        User user = null;
+    private BotUser parseUser(ResultSet rs) throws DAOException {
+        BotUser user = null;
         try {
             int userId = Integer.parseInt(rs.getString("user_id"));
             String firstName = rs.getString("first_name");
             String lastName = rs.getString("last_name");
             String username = rs.getString("user_name");
             String languageCode = rs.getString("language_code");
-            boolean isBot = rs.getBoolean("is_bot");
-            user = new User(userId, firstName, isBot, lastName, username, languageCode);
+            String translationLang = rs.getString("translation_lang");
+            user = new BotUser(userId, firstName, lastName, username, languageCode, translationLang);
         } catch (SQLException e) {
             logger.error("Can't find user", e);
             throw new DAOException("Can't find user", e);
@@ -122,14 +122,14 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
-    private void setStatementParams(PreparedStatement statement, User user) throws DAOException {
+    private void setStatementParams(PreparedStatement statement, BotUser user) throws DAOException {
         try {
             statement.setInt(1, user.getId());
             statement.setString(2, user.getFirstName());
             statement.setString(3, user.getLastName());
             statement.setString(4, user.getUserName());
             statement.setString(5, user.getLanguageCode());
-            statement.setBoolean(6, user.getBot());
+            statement.setString(6, user.getTranslationLang());
         } catch (SQLException e) {
             logger.error("Can't set statement params", e);
             throw new DAOException("Can't set statement params", e);

@@ -21,6 +21,9 @@ public class CommandFactory {
             case SETBOTLANG:
                 command = new SetBotLangCommand();
                 break;
+            case TOLANG:
+                command = new ToLangCommand();
+                break;
             default:
                 throw new AssertionError("The passed command type was not found");
         }

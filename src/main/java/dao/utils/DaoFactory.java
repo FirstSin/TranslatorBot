@@ -1,7 +1,7 @@
 package dao.utils;
 
-import dao.UserDao;
-import dao.UserDaoImpl;
+import dao.BotUserDao;
+import dao.BotUserDaoImpl;
 import org.apache.log4j.Logger;
 
 import java.io.FileInputStream;
@@ -25,8 +25,8 @@ public class DaoFactory {
         return factory;
     }
 
-    public UserDao getUserDao(){
-        return new UserDaoImpl();
+    public BotUserDao getUserDao(){
+        return new BotUserDaoImpl();
     }
 
     public Connection getConnection() throws SQLException {
