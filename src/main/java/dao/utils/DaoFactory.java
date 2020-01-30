@@ -20,6 +20,7 @@ public class DaoFactory {
 
     public static DaoFactory getInstance(){
         if(factory == null){
+            logger.info("Creating DaoFactory instance");
             factory = new DaoFactory();
         }
         return factory;
@@ -30,6 +31,7 @@ public class DaoFactory {
     }
 
     public Connection getConnection() throws SQLException {
+        logger.info("Opening new connection");
         Connection connection = null;
         try (InputStream in = new FileInputStream("src/main/resources/connection.properties")) {
             Properties prop = new Properties();

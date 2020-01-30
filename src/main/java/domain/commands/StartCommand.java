@@ -2,13 +2,13 @@ package domain.commands;
 
 import dao.exceptions.DAOException;
 import dao.services.BotUserService;
-import domain.model.CommandType;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import domain.model.BotUser;
 import org.telegram.telegrambots.meta.api.objects.User;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.StringJoiner;
 
 public class StartCommand implements Command {
     private static final CommandType type = CommandType.START;
@@ -18,22 +18,15 @@ public class StartCommand implements Command {
         User currentUser = message.getFrom();
         BotUser botUser = userService.findUser(currentUser.getId());
         String response;
-        ResourceBundle resourceBundle;
-
         if (botUser == null) {
-            botUser = new BotUser(currentUser.getId(), currentUser.getFirstName(), currentUser.getLastName(), currentUser.getUserName(), currentUser.getLanguageCode());
+            botUser = new BotUser(currentUser.getId(), currentUser.getFirstName(),
+                                  currentUser.getLastName(), currentUser.getUserName(),
+                                  currentUser.getLanguageCode());
             userService.saveUser(botUser);
-            resourceBundle = ResourceBundle.getBundle("languages.start", Locale.forLanguageTag(botUser.getLanguageCode()));
-            response = resourceBundle.getString(
-                    "hello") + currentUser.getFirstName() + " " + currentUser.getLastName() + resourceBundle.getString(
-                    "firstMeeting") + resourceBundle.getString("introduction");
-        } else {
-            resourceBundle = ResourceBundle.getBundle("languages.start", Locale.forLanguageTag(botUser.getLanguageCode()));
-            response = resourceBundle.getString(
-                    "hello") + currentUser.getFirstName() + " " + currentUser.getLastName() + resourceBundle.getString(
-                    "anotherMeeting") + resourceBundle.getString("introduction");
-            ;
+            response = makeResponse(botUser, true);
         }
+        else
+            response = makeResponse(botUser, false);
 
         return response;
     }
@@ -44,5 +37,14 @@ public class StartCommand implements Command {
 
     public String getDescription() {
         return type.getDescription();
+    }
+
+    private String makeResponse(BotUser botUser, boolean firstRun) {
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("internationalization.start", Locale.forLanguageTag(botUser.getLanguageCode()));
+        String response = new StringJoiner(" ").add(resourceBundle.getString("greeting"))
+                                               .add(botUser.getFirstName()).add(botUser.getLastName() + "!")
+                                               .add(resourceBundle.getString(firstRun ? "firstRun" : "alreadyLaunched"))
+                                               .toString();
+        return response;
     }
 }

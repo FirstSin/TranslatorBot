@@ -44,10 +44,10 @@ public class YandexTranslator implements Translator {
     private String getTextFromJson(String json) {
         Gson gson = new Gson();
         Message message = gson.fromJson(json, Message.class);
-        logger.debug(new StringJoiner(" ")
-                .add("Translation result:\nStatus-code:")
+        logger.debug(new StringJoiner("")
+                .add("Translation result:\nStatus-code: ")
                 .add(String.valueOf(message.getCode()))
-                .add(", lang:").add(message.getLang())
+                .add(" , lang:").add(message.getLang())
                 .add(", text:").add(message.getText()));
         return message.getText();
     }

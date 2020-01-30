@@ -7,12 +7,15 @@ import domain.utils.TextHandler;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.Properties;
 
 public class TranslatorBot extends TelegramLongPollingBot {
@@ -26,8 +29,8 @@ public class TranslatorBot extends TelegramLongPollingBot {
         setBotProperties();
     }
 
-    public static TranslatorBot getInstance(){
-        if(translatorBot == null)
+    public static TranslatorBot getInstance() {
+        if (translatorBot == null)
             translatorBot = new TranslatorBot();
         return translatorBot;
     }
@@ -52,18 +55,10 @@ public class TranslatorBot extends TelegramLongPollingBot {
 
             if (isCommand) {
                 Handler handler = CommandHandler.getInstance();
-                try {
-                    response = handler.handle(update);
-                } catch (DAOException e) {
-                    e.printStackTrace();
-                }
+                response = handler.handle(update);
             } else {
                 Handler handler = TextHandler.getInstance();
-                try {
-                    response = handler.handle(update);
-                } catch (DAOException e) {
-                    e.printStackTrace();
-                }
+                response = handler.handle(update);
             }
 
             try {

@@ -1,7 +1,7 @@
 package domain.utils;
 
 import domain.commands.*;
-import domain.model.CommandType;
+import domain.commands.CommandType;
 
 import javax.validation.constraints.NotNull;
 
@@ -15,11 +15,11 @@ public class CommandFactory {
             case HELP:
                 command = new HelpCommand();
                 break;
-            case BOTLANG:
-                command = new BotLangCommand();
+            case LANGINFO:
+                command = new LangInfoCommand();
                 break;
-            case SETBOTLANG:
-                command = new SetBotLangCommand();
+            case SETMYLANG:
+                command = new SetMyLangCommand();
                 break;
             case TOLANG:
                 command = new ToLangCommand();

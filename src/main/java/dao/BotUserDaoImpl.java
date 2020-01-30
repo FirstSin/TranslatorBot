@@ -13,7 +13,7 @@ public class BotUserDaoImpl implements BotUserDao {
     private static final Logger logger = Logger.getLogger(BotUserDaoImpl.class);
     private DaoFactory daoFactory = DaoFactory.getInstance();
     private static final String SAVE_USER_QUERY = "INSERT INTO users (user_id, first_name, last_name, user_name, language_code, translation_lang) VALUES (?,?,?,?,?,?)";
-    private static final String UPDATE_USER_QUERY = "UPDATE users SET user_id = ?, first_name = ?, last_name = ?, user_name = ?, language_code = ?, translation_lang = ?";
+    private static final String UPDATE_USER_QUERY = "UPDATE users SET language_code = ?, translation_lang = ? WHERE user_id = ?";
     private static final String DELETE_USER_QUERY = "DELETE FROM users WHERE user_id = ?";
     private static final String SELECT_USER_QUERY = "SELECT * FROM users WHERE user_id = ?";
     private static final String SELECT_ALL_USERS_QUERY = "SELECT * FROM users";
@@ -44,7 +44,12 @@ public class BotUserDaoImpl implements BotUserDao {
         logger.trace("Saving user with id " + user.getId());
         try (Connection connection = daoFactory.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(SAVE_USER_QUERY)) {
-                setStatementParams(statement, user);
+                statement.setInt(1, user.getId());
+                statement.setString(2, user.getFirstName());
+                statement.setString(3, user.getLastName());
+                statement.setString(4, user.getUserName());
+                statement.setString(5, user.getLanguageCode());
+                statement.setString(6, user.getTranslationLang());
                 statement.executeUpdate();
                 logger.trace("User with id " + user.getId() + " is saved.");
             }
@@ -59,7 +64,9 @@ public class BotUserDaoImpl implements BotUserDao {
         logger.trace("Updating user with id " + user.getId());
         try (Connection connection = daoFactory.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(UPDATE_USER_QUERY)) {
-                setStatementParams(statement, user);
+                statement.setString(1, user.getLanguageCode());
+                statement.setString(2, user.getTranslationLang());
+                statement.setInt(3, user.getId());
                 statement.executeUpdate();
                 logger.trace("User with id " + user.getId() + " is updated.");
             }
@@ -120,19 +127,5 @@ public class BotUserDaoImpl implements BotUserDao {
             throw new DAOException("Can't find user", e);
         }
         return user;
-    }
-
-    private void setStatementParams(PreparedStatement statement, BotUser user) throws DAOException {
-        try {
-            statement.setInt(1, user.getId());
-            statement.setString(2, user.getFirstName());
-            statement.setString(3, user.getLastName());
-            statement.setString(4, user.getUserName());
-            statement.setString(5, user.getLanguageCode());
-            statement.setString(6, user.getTranslationLang());
-        } catch (SQLException e) {
-            logger.error("Can't set statement params", e);
-            throw new DAOException("Can't set statement params", e);
-        }
     }
 }

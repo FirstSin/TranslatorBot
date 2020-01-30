@@ -1,10 +1,10 @@
-package domain.model;
+package domain.commands;
 
 public enum CommandType {
     START("start", "Start using the bot"),
     HELP("help", "Displays a list of all available commands"),
-    BOTLANG("botlang", "Displays the language of the bot"),
-    SETBOTLANG("setbotlang", "Changes the language of the bot"),
+    LANGINFO("langinfo", "Displays the language of the bot"),
+    SETMYLANG("setmylang", "Changes the language of the bot"),
     TOLANG("tolang", "Set translation language");
 
     private String command;

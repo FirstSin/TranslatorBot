@@ -31,12 +31,14 @@ public class TextHandler implements Handler {
     @Override
     public BotApiMethod handle(Update update) {
         long chatId = update.getMessage().getChatId();
-        String message = update.getMessage().getText();
+        String text = update.getMessage().getText();
         String response = null;
         try {
-            response = translator.translate(message, getTranslationLang(update));
-        } catch (IOException | DAOException e) {
+            response = translator.translate(text, getTranslationLang(update));
+        } catch (IOException e) {
             logger.error("An error occurred while translating the text", e);
+        } catch (DAOException e){
+            logger.error("An error occurred in the DAO layer", e);
         }
         SendMessage sendMessage = new SendMessage();
         sendMessage.setText(response).setChatId(chatId);

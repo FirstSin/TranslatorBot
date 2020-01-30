@@ -1,11 +1,13 @@
 package domain.model;
 
+import java.util.Objects;
+
 public class BotUser {
     private int userId;
     private String firstName;
     private String lastName;
     private String userName;
-    private String languageCode;
+    private String languageCode = "en";
     private String translationLang = "en";
 
     public BotUser(int userId, String firstName, String lastName, String userName, String languageCode) {
@@ -13,7 +15,7 @@ public class BotUser {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
-        this.languageCode = languageCode;
+        this.languageCode = languageCode != null ? languageCode : this.languageCode;
     }
 
     public BotUser(int userId, String firstName, String lastName, String userName, String languageCode, String translationLang) {
