@@ -1,27 +1,20 @@
 package domain.commands;
 
 import dao.exceptions.DAOException;
-import dao.services.BotUserService;
-import domain.model.BotUser;
-import org.telegram.telegrambots.meta.api.objects.Message;
-
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.StringJoiner;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.User;
 
 public class LangInfoCommand implements Command {
     private static final CommandType type = CommandType.LANGINFO;
-    private BotUserService userService = new BotUserService();
+    private CommandExecutor executor;
+
+    public LangInfoCommand(CommandExecutor executor) {
+        this.executor = executor;
+    }
 
     @Override
-    public String execute(Message message, String[] args) throws DAOException {
-        BotUser botUser = userService.findUser(message.getFrom().getId());
-        ResourceBundle resBundle = ResourceBundle.getBundle("internationalization.langinfo", Locale.forLanguageTag(botUser.getLanguageCode()));
-        String response = new StringJoiner("").add(resBundle.getString("myLang"))
-                                             .add(Locale.forLanguageTag(botUser.getLanguageCode()).getDisplayLanguage()).add("\n")
-                                             .add(resBundle.getString("toLang"))
-                                             .add(Locale.forLanguageTag(botUser.getTranslationLang()).getDisplayLanguage()).toString();
-        return response;
+    public void execute(User user, String argument, SendMessage response) throws DAOException {
+        executor.langInfo(user, response);
     }
 
     public String getCommand() {

@@ -2,44 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6689b11b-e13a-40fd-bdc0-597fccf88904" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/internationalization/commands.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/internationalization/commands_en.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/internationalization/commands_ru.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/internationalization/other.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/internationalization/other_en.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/internationalization/other_ru.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/internationalization/start.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/internationalization/start_en.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/internationalization/start_ru.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain/commands/CommandExecutor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain/utils/HandlerSelector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain/utils/UIHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/BotUserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/BotUserDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/utils/DaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/utils/DaoFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/BotLangCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/LangInfoCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/Command.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/HelpCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/SetBotLangCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/SetMyLangCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/LangInfoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/LangInfoCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/SetMyLangCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/SetMyLangCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/StartCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/StartCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/ToLangCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/ToLangCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/model/BotUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/model/BotUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/model/CommandType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/CommandType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/model/TranslatorBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/model/TranslatorBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/model/YandexTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/model/YandexTranslator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/CommandFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/CommandFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/CommandHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/Handler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/TextHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/TextHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/languages/botlang.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/internationalization/langinfo.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/languages/botlang_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/internationalization/langinfo_en.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/languages/botlang_ru.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/internationalization/langinfo_ru.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/languages/start.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/languages/start_en.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/languages/start_ru.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/languages/botlang.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/languages/botlang_en.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/languages/botlang_ru.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/languages/start.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/languages/start_en.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/languages/start_ru.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/internationalization/commands.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/internationalization/commands.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/internationalization/commands_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/internationalization/commands_en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/internationalization/commands.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/internationalization/commands.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/internationalization/commands_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/internationalization/commands_en.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,7 +125,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Mods_Parser" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../untitled" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -245,7 +226,13 @@
       <workItem from="1580218730926" duration="20449000" />
       <workItem from="1580309331746" duration="1369000" />
       <workItem from="1580346567130" duration="15641000" />
-      <workItem from="1580366682729" duration="2737000" />
+      <workItem from="1580366682729" duration="3299000" />
+      <workItem from="1580398481287" duration="2344000" />
+      <workItem from="1580433604230" duration="7358000" />
+      <workItem from="1580581894356" duration="1749000" />
+      <workItem from="1580673515755" duration="2062000" />
+      <workItem from="1580702511826" duration="1177000" />
+      <workItem from="1580750726887" duration="10420000" />
     </task>
     <servers />
   </component>
@@ -253,6 +240,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="552" y="179" key="#Notifications" timestamp="1580759999345">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="179" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1580759999345" />
     <state x="552" y="179" key="#Project_Structure" timestamp="1579711186559">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -261,10 +252,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580149439598" />
-    <state x="765" y="230" key="#com.intellij.ide.util.MemberChooser" timestamp="1580244097604">
+    <state x="765" y="230" key="#com.intellij.ide.util.MemberChooser" timestamp="1580757512693">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="230" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1580244097604" />
+    <state x="765" y="230" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1580757512693" />
     <state x="590" y="210" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1580149201224">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -289,42 +280,42 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="585" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1580154532342" />
-    <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1580234890046">
+    <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1580751316158">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1580234890046" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1580369377157">
+    <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1580751316158" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1580761902674">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580369377157" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1580369377157">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580761902674" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1580761902673">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580369377157" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1580369377156">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580761902673" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1580761902673">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580369377156" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1580369377157">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580761902673" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1580761902674">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580369377157" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1580369142684">
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580761902673" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1580446867047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580369142684" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1580369142683">
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580446867047" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1580446867047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580369142683" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1580369142683">
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580446867047" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1580446867046">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580369142683" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1580369142684">
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580446867046" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1580446867047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580369142684" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580446867047" />
     <state x="461" y="163" key="SettingsEditor" timestamp="1580144313719">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -333,10 +324,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="669" y="162" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580153294953" />
-    <state x="859" y="542" key="com.intellij.ide.util.TipDialog" timestamp="1580366815231">
+    <state x="859" y="542" key="com.intellij.ide.util.TipDialog" timestamp="1580750729209">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="859" y="542" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580366815231" />
+    <state x="859" y="542" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580750729209" />
     <state x="690" y="287" key="extract.method.dialog" timestamp="1580146336585">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -1,9 +1,7 @@
 package domain.model;
 
-import dao.exceptions.DAOException;
 import domain.utils.Handler;
-import domain.utils.CommandHandler;
-import domain.utils.TextHandler;
+import domain.utils.HandlerSelector;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -14,8 +12,6 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.util.Properties;
 
 public class TranslatorBot extends TelegramLongPollingBot {
@@ -30,42 +26,29 @@ public class TranslatorBot extends TelegramLongPollingBot {
     }
 
     public static TranslatorBot getInstance() {
-        if (translatorBot == null)
+        if (translatorBot == null) {
+            logger.info("Creating an instance of the bot class");
             translatorBot = new TranslatorBot();
-        return translatorBot;
-    }
-
-    private void setBotProperties() {
-        try (InputStream in = new FileInputStream("src/main/resources/botinfo.properties")) {
-            Properties prop = new Properties();
-            prop.load(in);
-            username = prop.getProperty("username");
-            token = prop.getProperty("token");
-        } catch (IOException e) {
-            logger.error("An error occurred while loading properties: " + e.getMessage(), e);
         }
+        return translatorBot;
     }
 
     @Override
     public void onUpdateReceived(Update update) {
         boolean isNonNull = update.getMessage().getText() != null;
         if (update.hasMessage() && isNonNull) {
-            BotApiMethod response = null;
-            boolean isCommand = update.getMessage().getText().startsWith("/");
+            sendMsg(update);
+        }
+    }
 
-            if (isCommand) {
-                Handler handler = CommandHandler.getInstance();
-                response = handler.handle(update);
-            } else {
-                Handler handler = TextHandler.getInstance();
-                response = handler.handle(update);
-            }
-
-            try {
-                execute(response);
-            } catch (TelegramApiException e) {
-                logger.error("Problems with execution:\n" + e);
-            }
+    public synchronized void sendMsg(Update update){
+        SendMessage response = new SendMessage();
+        Handler handler = HandlerSelector.selectByMessage(update.getMessage().getText());
+        handler.handle(update, response);
+        try {
+            execute(response);
+        } catch (TelegramApiException e) {
+            logger.error("Problems with execution:\n" + e);
         }
     }
 
@@ -77,5 +60,18 @@ public class TranslatorBot extends TelegramLongPollingBot {
     @Override
     public String getBotToken() {
         return token;
+    }
+
+
+    private void setBotProperties() {
+        logger.info("Initialize the properties of the bot");
+        try (InputStream in = new FileInputStream("src/main/resources/botinfo.properties")) {
+            Properties prop = new Properties();
+            prop.load(in);
+            username = prop.getProperty("username");
+            token = prop.getProperty("token");
+        } catch (IOException e) {
+            logger.error("An error occurred while loading properties: " + e.getMessage(), e);
+        }
     }
 }

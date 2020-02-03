@@ -1,31 +1,29 @@
 package domain.utils;
 
 import domain.commands.*;
-import domain.commands.CommandType;
 
 import javax.validation.constraints.NotNull;
 
 public class CommandFactory {
+    private CommandExecutor commandExecutor = new CommandExecutor();
     public Command getCommand(@NotNull CommandType type){
         Command command = null;
         switch (type){
             case START:
-                command = new StartCommand();
+                command = new StartCommand(commandExecutor);
                 break;
             case HELP:
-                command = new HelpCommand();
+                command = new HelpCommand(commandExecutor);
                 break;
             case LANGINFO:
-                command = new LangInfoCommand();
+                command = new LangInfoCommand(commandExecutor);
                 break;
             case SETMYLANG:
-                command = new SetMyLangCommand();
+                command = new SetMyLangCommand(commandExecutor);
                 break;
             case TOLANG:
-                command = new ToLangCommand();
+                command = new ToLangCommand(commandExecutor);
                 break;
-            default:
-                throw new AssertionError("The passed command type was not found");
         }
         return command;
     }

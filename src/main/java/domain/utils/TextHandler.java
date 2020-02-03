@@ -6,8 +6,8 @@ import domain.model.BotUser;
 import domain.model.Translator;
 import domain.model.YandexTranslator;
 import org.apache.log4j.Logger;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.io.IOException;
@@ -29,20 +29,20 @@ public class TextHandler implements Handler {
     }
 
     @Override
-    public BotApiMethod handle(Update update) {
-        long chatId = update.getMessage().getChatId();
-        String text = update.getMessage().getText();
-        String response = null;
+    public void handle(Update update, SendMessage response) {
+        Message message = update.getMessage();
+        long chatId = message.getChatId();
+        String text = message.getText();
+        String translatedText = null;
         try {
-            response = translator.translate(text, getTranslationLang(update));
+            translatedText = translator.translate(text, getTranslationLang(update));
         } catch (IOException e) {
             logger.error("An error occurred while translating the text", e);
-        } catch (DAOException e){
+        } catch (DAOException e) {
             logger.error("An error occurred in the DAO layer", e);
         }
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setText(response).setChatId(chatId);
-        return sendMessage;
+
+        response.setChatId(chatId).setText(translatedText).setParseMode("HTML");
     }
 
     private String getTranslationLang(Update update) throws DAOException {

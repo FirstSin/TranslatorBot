@@ -2,15 +2,12 @@ package domain.utils;
 
 import dao.exceptions.DAOException;
 import domain.commands.Command;
-import domain.exceptions.CommandNotFoundException;
 import domain.commands.CommandType;
+import domain.exceptions.CommandNotFoundException;
 import org.apache.log4j.Logger;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-
-import javax.validation.constraints.NotNull;
 
 public class CommandHandler implements Handler {
 
@@ -29,7 +26,7 @@ public class CommandHandler implements Handler {
     }
 
     @Override
-    public BotApiMethod handle(Update update) {
+    public void handle(Update update, SendMessage response) {
         Message message = update.getMessage();
         long chatId = message.getChatId();
         String text = message.getText();
@@ -40,16 +37,14 @@ public class CommandHandler implements Handler {
             logger.error("An error occurred while defining the command: " + e + " User message: " + text);
         }
         Command command = commandFactory.getCommand(type);
-        String[] args = getCommandArgs(text);
-        String commandAnswer = null;
+        String argument = getCommandArgument(text);
         try {
-            commandAnswer = command.execute(message, args);
+            command.execute(update.getMessage().getFrom(), argument, response);
         } catch (DAOException e) {
             logger.error("An error occurred in the DAO layer", e);
         }
-        SendMessage response = new SendMessage();
-        setResponseParams(response, chatId, commandAnswer);
-        return response;
+
+        response.setChatId(chatId).setParseMode("HTML");
     }
 
     private CommandType defineCommandType(String message) throws CommandNotFoundException {
@@ -63,17 +58,11 @@ public class CommandHandler implements Handler {
         throw new CommandNotFoundException("The сommand '" + command + "' not found.");
     }
 
-    private String[] getCommandArgs(String message) {
-        if (message.split(" ").length < 2)
+    private String getCommandArgument(String message) {
+        String[] values = message.split(" ");
+        if (values.length < 2)
             return null;
-        String arguments = message.substring(message.indexOf(" ") + 1);
-        String[] args = arguments.split(" ");
-        return args;
-    }
 
-    private void setResponseParams(@NotNull SendMessage response, @NotNull long chatId, @NotNull String text) {
-        response.setChatId(chatId);
-        response.setText(text);
-        response.setParseMode("HTML");
+        return values[1];
     }
 }
