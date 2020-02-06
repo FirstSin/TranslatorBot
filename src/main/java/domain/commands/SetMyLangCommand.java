@@ -14,7 +14,7 @@ public class SetMyLangCommand implements Command {
 
     @Override
     public void execute(User user, String argument, SendMessage response) throws DAOException {
-        executor.setMyLang(user, argument, response);
+        executor.setMyLang(user, argument, response, this);
     }
 
     public String getCommand() {
@@ -24,6 +24,4 @@ public class SetMyLangCommand implements Command {
     public String getDescription() {
         return type.getDescription();
     }
-
-
 }

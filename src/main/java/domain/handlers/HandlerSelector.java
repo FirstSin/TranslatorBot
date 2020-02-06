@@ -1,4 +1,4 @@
-package domain.utils;
+package domain.handlers;
 
 public class HandlerSelector {
     public static Handler selectByMessage(String message) {

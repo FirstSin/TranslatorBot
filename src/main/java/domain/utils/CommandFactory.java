@@ -6,9 +6,10 @@ import javax.validation.constraints.NotNull;
 
 public class CommandFactory {
     private CommandExecutor commandExecutor = new CommandExecutor();
-    public Command getCommand(@NotNull CommandType type){
+
+    public Command getCommand(@NotNull CommandType type) {
         Command command = null;
-        switch (type){
+        switch (type) {
             case START:
                 command = new StartCommand(commandExecutor);
                 break;

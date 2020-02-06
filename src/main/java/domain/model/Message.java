@@ -1,7 +1,5 @@
 package domain.model;
 
-import java.util.Arrays;
-
 public class Message {
     private int code;
     private String lang;

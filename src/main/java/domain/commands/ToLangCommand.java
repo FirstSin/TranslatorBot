@@ -14,7 +14,7 @@ public class ToLangCommand implements Command {
 
     @Override
     public void execute(User user, String argument, SendMessage response) throws DAOException {
-        executor.toLang(user, argument, response);
+        executor.toLang(user, argument, response, this);
     }
 
     public String getCommand() {

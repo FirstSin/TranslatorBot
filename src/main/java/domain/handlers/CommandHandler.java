@@ -1,9 +1,10 @@
-package domain.utils;
+package domain.handlers;
 
 import dao.exceptions.DAOException;
 import domain.commands.Command;
 import domain.commands.CommandType;
 import domain.exceptions.CommandNotFoundException;
+import domain.utils.CommandFactory;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -27,6 +28,7 @@ public class CommandHandler implements Handler {
 
     @Override
     public void handle(Update update, SendMessage response) {
+        logger.trace("Processing of the command message begins");
         Message message = update.getMessage();
         long chatId = message.getChatId();
         String text = message.getText();
@@ -45,6 +47,7 @@ public class CommandHandler implements Handler {
         }
 
         response.setChatId(chatId).setParseMode("HTML");
+        logger.trace("Command processing was successful");
     }
 
     private CommandType defineCommandType(String message) throws CommandNotFoundException {
@@ -62,7 +65,6 @@ public class CommandHandler implements Handler {
         String[] values = message.split(" ");
         if (values.length < 2)
             return null;
-
         return values[1];
     }
 }

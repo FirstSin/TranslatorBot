@@ -1,7 +1,5 @@
 package domain.model;
 
-import java.util.Objects;
-
 public class BotUser {
     private int userId;
     private String firstName;
