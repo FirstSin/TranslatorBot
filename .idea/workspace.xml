@@ -1,41 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6689b11b-e13a-40fd-bdc0-597fccf88904" name="Default Changelist" comment="Added localization in 16 languages">
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/templates/ButtonTemplate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/utils/ArgumentsWaiter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/utils/ButtonSetter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/utils/LocalizationUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/utils/MessageTemplate.java" afterDir="false" />
+    <list default="true" id="6689b11b-e13a-40fd-bdc0-597fccf88904" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/dao/utils/ConnectionUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain/templates/ErrorMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain/utils/ErrorMessageUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/BotUserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/BotUserDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/utils/DaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/utils/DaoFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/CommandExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/CommandExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/SetMyLangCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/SetMyLangCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/StartCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/StartCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/ToLangCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/ToLangCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/model/BotUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/model/BotUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/model/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/model/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/model/Translator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/model/Translator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/handlers/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/handlers/CommandHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/model/TranslatorBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/model/TranslatorBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/model/YandexTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/model/YandexTranslator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/CommandFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/CommandFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/handlers/CommandHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/handlers/Handler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/HandlerSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/handlers/HandlerSelector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/TextHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/handlers/TextHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/UIHelper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/templates/ButtonTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/templates/ButtonTemplate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/ButtonSetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/ButtonSetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/LocalizationUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/LocalizationUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/strings.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/strings.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/strings_ar.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/strings_ar.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/strings_bn.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/strings_bn.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/strings_cs.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/strings_cs.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/strings_de.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/strings_de.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/strings_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/strings_en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/strings_es.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/strings_es.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/strings_et.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/strings_et.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/strings_fr.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/strings_fr.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/strings_hi.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/strings_hi.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/strings_it.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/strings_it.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/strings_ja.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/strings_ja.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/strings_ko.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/strings_ko.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/strings_pt.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/strings_pt.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/localization/strings_ru.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/strings_ru.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/internationalization/commands.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/internationalization/commands_en.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/internationalization/commands_ru.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/internationalization/langinfo.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/internationalization/langinfo_en.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/internationalization/langinfo_ru.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/internationalization/other.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/internationalization/other_en.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/internationalization/other_ru.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/internationalization/start.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/internationalization/start_en.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/internationalization/start_ru.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/strings_vi.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/strings_vi.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/strings_zh.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/strings_zh.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,8 +106,8 @@
       <list>
         <option value="Interface" />
         <option value="hibernate-configuration-5.2" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -140,11 +135,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../untitled" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../DatabaseProgram" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.sqlOptions" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -257,7 +252,7 @@
       <workItem from="1580909121839" duration="18007000" />
       <workItem from="1580968005706" duration="2071000" />
       <workItem from="1580970354582" duration="203000" />
-      <workItem from="1581003386854" duration="10096000" />
+      <workItem from="1581003386854" duration="18490000" />
     </task>
     <task id="LOCAL-00001" summary="Added localization in 16 languages">
       <created>1581008360074</created>
@@ -266,7 +261,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581008360074</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added language selection using buttons">
+      <created>1581014623023</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1581014623024</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -274,7 +276,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added localization in 16 languages" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added localization in 16 languages" />
+    <MESSAGE value="Added language selection using buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added language selection using buttons" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="179" key="#Notifications" timestamp="1580759999345">
@@ -289,10 +292,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580970552688" />
-    <state x="765" y="230" key="#com.intellij.ide.util.MemberChooser" timestamp="1580848383918">
+    <state x="765" y="230" key="#com.intellij.ide.util.MemberChooser" timestamp="1581022249134">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="230" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1580848383918" />
+    <state x="765" y="230" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1581022249134" />
     <state x="590" y="210" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1580149201224">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -309,54 +312,54 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581012723126" />
-    <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1581004650607">
+    <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1581019794606">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581004650607" />
-    <state x="585" y="115" key="CommitChangelistDialog2" timestamp="1581011674820">
+    <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581019794606" />
+    <state x="585" y="115" key="CommitChangelistDialog2" timestamp="1581023327448">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1581011674820" />
-    <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1580751316158">
+    <state x="585" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1581023327448" />
+    <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1581021543982">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1580751316158" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1581014541052">
+    <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1581021543982" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1581023327464">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581014541052" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1581014541052">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581023327464" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1581023327464">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581014541052" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1581014541052">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581023327464" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1581023327464">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581014541052" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1581014541052">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581023327464" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1581023327464">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581014541052" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1581014373621">
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581023327464" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1581019191521">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581014373621" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1581014373621">
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581019191521" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1581019191521">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581014373621" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1581014373621">
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581019191521" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1581019191521">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581014373621" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1581014373621">
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581019191521" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1581019191521">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581014373621" />
-    <state x="461" y="163" key="SettingsEditor" timestamp="1580144313719">
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581019191521" />
+    <state x="461" y="163" key="SettingsEditor" timestamp="1581023390119">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="163" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1580144313719" />
+    <state x="461" y="163" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1581023390119" />
     <state x="669" y="162" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1580153294953">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

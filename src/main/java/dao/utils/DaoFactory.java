@@ -29,20 +29,4 @@ public class DaoFactory {
     public BotUserDao getUserDao(){
         return new BotUserDaoImpl();
     }
-
-    public Connection getConnection() throws SQLException {
-        logger.info("Opening new connection");
-        Connection connection = null;
-        try (InputStream in = new FileInputStream("src/main/resources/connection.properties")) {
-            Properties prop = new Properties();
-            prop.load(in);
-            String username = prop.getProperty("username");
-            String url = prop.getProperty("url");
-            String password = prop.getProperty("password");
-            connection = DriverManager.getConnection(url, username, password);
-        } catch (IOException e) {
-            logger.error("An error occurred while loading connection properties. ", e);
-        }
-        return connection;
-    }
 }

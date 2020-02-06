@@ -1,6 +1,7 @@
 package dao;
 
 import dao.exceptions.DAOException;
+import dao.utils.ConnectionUtils;
 import dao.utils.DaoFactory;
 import domain.model.BotUser;
 import org.apache.log4j.Logger;
@@ -22,7 +23,8 @@ public class BotUserDaoImpl implements BotUserDao {
     public BotUser findById(int id) throws DAOException {
         logger.trace("Finding user with id " + id);
         BotUser user = null;
-        try (Connection connection = daoFactory.getConnection()) {
+        try {
+            Connection connection = ConnectionUtils.getConnection();
             try (PreparedStatement statement = connection.prepareStatement(SELECT_USER_QUERY)) {
                 statement.setInt(1, id);
                 try (ResultSet rs = statement.executeQuery()) {
@@ -32,6 +34,7 @@ public class BotUserDaoImpl implements BotUserDao {
                     logger.trace("User with id " + id + " were found");
                 }
             }
+            ConnectionUtils.putConnection(connection);
         } catch (SQLException e) {
             logger.error("Can't find user", e);
             throw new DAOException("Can't find user", e);
@@ -42,7 +45,8 @@ public class BotUserDaoImpl implements BotUserDao {
     @Override
     public void save(BotUser user) throws DAOException {
         logger.trace("Saving user with id " + user.getId());
-        try (Connection connection = daoFactory.getConnection()) {
+        try {
+            Connection connection = ConnectionUtils.getConnection();
             try (PreparedStatement statement = connection.prepareStatement(SAVE_USER_QUERY)) {
                 statement.setInt(1, user.getId());
                 statement.setString(2, user.getFirstName());
@@ -53,6 +57,7 @@ public class BotUserDaoImpl implements BotUserDao {
                 statement.executeUpdate();
                 logger.trace("User with id " + user.getId() + " is saved.");
             }
+            ConnectionUtils.putConnection(connection);
         } catch (SQLException e) {
             logger.error("Can't save user", e);
             throw new DAOException("Can't save user", e);
@@ -62,7 +67,8 @@ public class BotUserDaoImpl implements BotUserDao {
     @Override
     public void update(BotUser user) throws DAOException {
         logger.trace("Updating user with id " + user.getId());
-        try (Connection connection = daoFactory.getConnection()) {
+        try {
+            Connection connection = ConnectionUtils.getConnection();
             try (PreparedStatement statement = connection.prepareStatement(UPDATE_USER_QUERY)) {
                 statement.setString(1, user.getLanguageCode());
                 statement.setString(2, user.getTranslationLang());
@@ -70,6 +76,7 @@ public class BotUserDaoImpl implements BotUserDao {
                 statement.executeUpdate();
                 logger.trace("User with id " + user.getId() + " is updated.");
             }
+            ConnectionUtils.putConnection(connection);
         } catch (SQLException e) {
             logger.error("Can't update user", e);
             throw new DAOException("Can't update user", e);
@@ -79,12 +86,14 @@ public class BotUserDaoImpl implements BotUserDao {
     @Override
     public void delete(BotUser user) throws DAOException {
         logger.trace("Deleting user with id " + user.getId());
-        try (Connection connection = daoFactory.getConnection()) {
+        try {
+            Connection connection = ConnectionUtils.getConnection();
             try (PreparedStatement statement = connection.prepareStatement(DELETE_USER_QUERY)) {
                 statement.setInt(1, user.getId());
                 statement.executeUpdate();
                 logger.trace("User with id " + user.getId() + " is deleted.");
             }
+            ConnectionUtils.putConnection(connection);
         } catch (SQLException e) {
             logger.error("Can't delete user", e);
             throw new DAOException("Can't delete user", e);
@@ -95,7 +104,8 @@ public class BotUserDaoImpl implements BotUserDao {
     public List<BotUser> findAll() throws DAOException {
         logger.trace("Finding list of users");
         List<BotUser> users = new ArrayList<>();
-        try (Connection connection = daoFactory.getConnection()) {
+        try {
+            Connection connection = ConnectionUtils.getConnection();
             try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USERS_QUERY)) {
                 try (ResultSet rs = statement.executeQuery()) {
                     while (rs.next()) {
@@ -105,6 +115,7 @@ public class BotUserDaoImpl implements BotUserDao {
                     logger.trace("All users were found");
                 }
             }
+            ConnectionUtils.putConnection(connection);
         } catch (SQLException e) {
             logger.error("Can't find users list", e);
             throw new DAOException("Can't find users list", e);
