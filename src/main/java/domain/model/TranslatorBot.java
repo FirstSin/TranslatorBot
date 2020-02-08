@@ -26,7 +26,7 @@ public class TranslatorBot extends TelegramLongPollingBot {
 
     public static TranslatorBot getInstance() {
         if (translatorBot == null) {
-            logger.info("Creating an instance of the bot class");
+            logger.info("Creating an instance of the bot");
             translatorBot = new TranslatorBot();
         }
         return translatorBot;
@@ -34,16 +34,14 @@ public class TranslatorBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        long start = System.currentTimeMillis();
         boolean isNonNull = update.getMessage().getText() != null;
         if (update.hasMessage() && isNonNull) {
-
+            new Thread(() -> sendMsg(update)).start();
         }
-        long end = System.currentTimeMillis();
-        System.out.println(end-start);
     }
 
-    public synchronized void sendMsg(Update update){
+    public void sendMsg(Update update) {
+        logger.trace("Start processing the message");
         SendMessage response = new SendMessage();
         Handler handler = HandlerSelector.selectByMessage(update.getMessage().getText());
         handler.handle(update, response);
@@ -52,6 +50,7 @@ public class TranslatorBot extends TelegramLongPollingBot {
         } catch (TelegramApiException e) {
             logger.error("Problems with execution:\n" + e);
         }
+        logger.trace("the message was successfully processed and sent");
     }
 
     @Override
