@@ -20,12 +20,14 @@ public class ConnectionUtils {
 
     static {
         setProperties();
+        logger.info("Connection properties set successfully");
     }
 
-    private ConnectionUtils() { }
+    private ConnectionUtils() {
+    }
 
     public static Connection getConnection() throws SQLException {
-        logger.trace("Taking a connection from a pool");
+        logger.trace("Taking a connection from the pool");
         if (source == null)
             source = new PGPooledConnection(DriverManager.getConnection(url, name, password), true);
         return source.getConnection();
@@ -44,7 +46,7 @@ public class ConnectionUtils {
             url = prop.getProperty("url");
             password = prop.getProperty("password");
         } catch (IOException e) {
-            logger.error("An error occurred while loading connection properties. ", e);
+            logger.error("An error occurred while loading connection properties", e);
         }
     }
 }

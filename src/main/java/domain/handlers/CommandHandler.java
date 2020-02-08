@@ -4,10 +4,7 @@ import dao.exceptions.DAOException;
 import domain.commands.Command;
 import domain.commands.CommandType;
 import domain.exceptions.CommandNotFoundException;
-import domain.model.BotUser;
-import domain.templates.ErrorMessage;
 import domain.utils.CommandFactory;
-import domain.utils.ErrorMessageUtils;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -17,21 +14,14 @@ public class CommandHandler implements Handler {
 
     private static final Logger logger = Logger.getLogger(CommandHandler.class);
     private CommandFactory commandFactory;
-    private static Handler handler;
 
-    private CommandHandler() {
+    public CommandHandler() {
         commandFactory = new CommandFactory();
-    }
-
-    public static Handler getInstance() {
-        if (handler == null)
-            handler = new CommandHandler();
-        return handler;
     }
 
     @Override
     public void handle(Update update, SendMessage response) {
-        logger.trace("Processing of the command message begins");
+        logger.trace("Command processing starts. " + update.toString());
         Message message = update.getMessage();
         long chatId = message.getChatId();
         String text = message.getText();
@@ -50,7 +40,7 @@ public class CommandHandler implements Handler {
         } catch (DAOException e) {
             logger.error("An error occurred in the DAO layer", e);
         }
-        logger.trace("Command processing was successful");
+        logger.debug(command.toString() + " command executed successfully. Response: " + response.toString());
     }
 
     private CommandType defineCommandType(String message) throws CommandNotFoundException {
@@ -58,8 +48,10 @@ public class CommandHandler implements Handler {
         String command = textValues[0].replaceAll("/", "");
         CommandType[] types = CommandType.values();
         for (CommandType type : types) {
-            if (type.toString().equalsIgnoreCase(command))
+            if (type.toString().equalsIgnoreCase(command)) {
+                logger.debug("Received command: " + command);
                 return type;
+            }
         }
         throw new CommandNotFoundException("The сommand '" + command + "' not found.");
     }
@@ -68,6 +60,8 @@ public class CommandHandler implements Handler {
         String[] values = message.split(" ");
         if (values.length < 2)
             return null;
-        return values[1];
+        String arg = values[1];
+        logger.debug("Command argument: " + arg);
+        return arg;
     }
 }

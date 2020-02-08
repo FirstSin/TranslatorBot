@@ -17,23 +17,17 @@ import java.io.IOException;
 
 public class TextHandler implements Handler {
     private static final Logger logger = Logger.getLogger(TextHandler.class);
-    private static Handler textHandler;
     private Translator translator;
     private BotUserService userService = new BotUserService();
     private ArgumentsWaiter argumentsWaiter = ArgumentsWaiter.getInstance();
 
-    private TextHandler() {
-        translator = new YandexTranslator();
-    }
-
-    public static Handler getInstance() {
-        if (textHandler == null)
-            textHandler = new TextHandler();
-        return textHandler;
+    public TextHandler() {
+        translator = YandexTranslator.getInstance();
     }
 
     @Override
     public void handle(Update update, SendMessage response) {
+        logger.debug("Text processing starts. " + update.toString());
         Message message = update.getMessage();
         long chatId = message.getChatId();
         String text = message.getText();
@@ -48,9 +42,9 @@ public class TextHandler implements Handler {
             } catch (DAOException e) {
                 logger.error("An error occurred in the DAO layer", e);
             }
-
             response.setChatId(chatId).setText(translatedText).setParseMode("HTML");
         }
+        logger.debug("Text processed successfully. Response: " + response.toString());
     }
 
     private String getTranslationLang(Update update) throws DAOException {
@@ -67,5 +61,6 @@ public class TextHandler implements Handler {
         } catch (DAOException e) {
             logger.error("An error occurred in the DAO layer", e);
         }
+        logger.debug("The argument "+ argument + " was redirected to the " + command.toString() + " command");
     }
 }

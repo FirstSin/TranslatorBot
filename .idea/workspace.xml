@@ -3,11 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="6689b11b-e13a-40fd-bdc0-597fccf88904" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/utils/ConnectionUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/utils/ConnectionUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/utils/DaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/utils/DaoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/CommandExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/CommandExecutor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/handlers/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/handlers/CommandHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/handlers/TextHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/handlers/TextHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/model/TranslatorBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/model/TranslatorBot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/model/YandexTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/model/YandexTranslator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/ArgumentsWaiter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/ArgumentsWaiter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/ButtonSetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/ButtonSetter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/HandlerSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/HandlerSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/LocalizationUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/LocalizationUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,7 +239,7 @@
       <workItem from="1581003386854" duration="18649000" />
       <workItem from="1581181374765" duration="39000" />
       <workItem from="1581181453176" duration="3749000" />
-      <workItem from="1581185872584" duration="3024000" />
+      <workItem from="1581185872584" duration="9205000" />
     </task>
     <task id="LOCAL-00001" summary="Added localization in 16 languages">
       <created>1581008360074</created>
@@ -262,7 +269,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581185572290</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Messages are processed in parallel">
+      <created>1581189001298</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1581189001298</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -273,7 +287,8 @@
     <MESSAGE value="Added language selection using buttons" />
     <MESSAGE value="Added a conection pool" />
     <MESSAGE value="Added an unknown language message" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added an unknown language message" />
+    <MESSAGE value="Messages are processed in parallel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Messages are processed in parallel" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="179" key="#Notifications" timestamp="1580759999345">
@@ -308,6 +323,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="756" y="380" width="407" height="288" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1580369103222" />
+    <state x="676" y="230" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog" timestamp="1581194604896">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="676" y="230" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581194604896" />
     <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1581012723126">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -316,46 +335,46 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581019794606" />
-    <state x="585" y="115" key="CommitChangelistDialog2" timestamp="1581185569517">
+    <state x="585" y="115" key="CommitChangelistDialog2" timestamp="1581189000270">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1581185569517" />
+    <state x="585" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1581189000270" />
     <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1581021543982">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1581021543982" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1581188485223">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1581195037279">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581188485223" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1581188485222">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581195037279" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1581195037279">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581188485222" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1581188485222">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581195037279" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1581195037279">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581188485222" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1581188485222">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581195037279" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1581195037279">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581188485222" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1581023417815">
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581195037279" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1581191973783">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581023417815" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1581023417815">
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581191973783" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1581191973782">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581023417815" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1581023417814">
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581191973782" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1581191973782">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581023417814" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1581023417815">
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581191973782" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1581191973783">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581023417815" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581191973782" />
     <state x="461" y="163" key="SettingsEditor" timestamp="1581023390119">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

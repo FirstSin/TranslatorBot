@@ -1,11 +1,14 @@
 package domain.utils;
 
+import org.apache.log4j.Logger;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
 public class LocalizationUtils {
+    private static final Logger logger = Logger.getLogger(LocalizationUtils.class);
     private static Properties languages;
 
     static {
@@ -15,18 +18,22 @@ public class LocalizationUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        logger.trace("Languages have been successfully loaded from resources");
+    }
+
+    private LocalizationUtils() {
+        throw new AssertionError("Cannot create an instance of a class");
     }
 
     public static ResourceBundle getResourceBundle(String code, String name) {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("localization." + name, Locale.forLanguageTag(code));
-        return resourceBundle;
+        return ResourceBundle.getBundle("localization." + name, Locale.forLanguageTag(code));
     }
 
     public static String getStringByKeys(String langCode, String... args) {
         StringBuilder sb = new StringBuilder();
         ResourceBundle resBundle = getResourceBundle(langCode, "strings");
         for (String str : args) {
-            sb.append(resBundle.getString(str) + " ");
+            sb.append(resBundle.getString(str)).append(" ");
         }
         return sb.toString();
     }
@@ -36,17 +43,18 @@ public class LocalizationUtils {
         while (keys.hasMoreElements()) {
             String key = String.valueOf(keys.nextElement());
             String value = languages.getProperty(key);
-            if (value.equalsIgnoreCase(language))
+            if (value.equalsIgnoreCase(language)) {
                 return key;
+            }
         }
-        throw new IllegalArgumentException();
+        return null;
     }
 
-    public static boolean isAvailableCode(String langCode){
+    public static boolean isAvailableCode(String langCode) {
         return getLangCodes().contains(langCode);
     }
 
-    public static boolean isAvailableLang(String lang){
+    public static boolean isAvailableLang(String lang) {
         return getLanguages().contains(lang);
     }
 

@@ -8,35 +8,37 @@ import java.util.Deque;
 
 public class ArgumentsWaiter {
     private static final Logger logger = Logger.getLogger(ArgumentsWaiter.class);
-    private Deque<Command> waitingCommand;
+    private Deque<Command> waitingCommands;
     private static ArgumentsWaiter argumentsWaiter;
 
     public static ArgumentsWaiter getInstance() {
-        logger.trace("Getting an instance of a class");
         if (argumentsWaiter == null) {
             argumentsWaiter = new ArgumentsWaiter();
+            logger.info("Instance crated");
         }
         return argumentsWaiter;
     }
 
     private ArgumentsWaiter(){
-        logger.info("Creating an instance of the bot class");
-        waitingCommand = new ArrayDeque<>();
+        waitingCommands = new ArrayDeque<>();
     }
 
     public boolean isWaiting() {
-        return waitingCommand.isEmpty() ? false : true;
+        return waitingCommands.isEmpty() ? false : true;
     }
 
     public void waitForArgs(Command command) {
-        if(waitingCommand.size() >= 32) {
+        logger.debug("Waiting commands queue size: " + waitingCommands.size());
+        if(waitingCommands.size() >= 32) {
             logger.debug("Clearing the queue of pending commands");
-            waitingCommand.clear();
+            waitingCommands.clear();
         }
-        waitingCommand.addLast(command);
+        waitingCommands.addLast(command);
     }
 
     public Command getWaitingCommand() {
-        return waitingCommand.removeLast();
+        Command command = waitingCommands.removeLast();
+        logger.debug("Removing " + command.toString() + " command from the queue");
+        return command;
     }
 }

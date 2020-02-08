@@ -26,8 +26,8 @@ public class TranslatorBot extends TelegramLongPollingBot {
 
     public static TranslatorBot getInstance() {
         if (translatorBot == null) {
-            logger.info("Creating an instance of the bot");
             translatorBot = new TranslatorBot();
+            logger.info("Bot instance created");
         }
         return translatorBot;
     }
@@ -65,7 +65,6 @@ public class TranslatorBot extends TelegramLongPollingBot {
 
 
     private void setBotProperties() {
-        logger.info("Initialize the properties of the bot");
         try (InputStream in = new FileInputStream("src/main/resources/botinfo.properties")) {
             Properties prop = new Properties();
             prop.load(in);
@@ -74,5 +73,6 @@ public class TranslatorBot extends TelegramLongPollingBot {
         } catch (IOException e) {
             logger.error("An error occurred while loading properties: " + e.getMessage(), e);
         }
+        logger.info("Bot properties set successfully");
     }
 }

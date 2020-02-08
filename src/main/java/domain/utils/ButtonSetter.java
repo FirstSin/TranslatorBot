@@ -1,6 +1,7 @@
 package domain.utils;
 
 import domain.templates.ButtonTemplate;
+import org.apache.log4j.Logger;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ButtonSetter {
+    private static final Logger logger = Logger.getLogger(ButtonSetter.class);
     private static final int MAX_ROW_SIZE = 4;
 
     public static void setButtons(SendMessage response, ButtonTemplate template) {
@@ -33,13 +35,13 @@ public class ButtonSetter {
         List<String> languages = LocalizationUtils.getLanguages();
         KeyboardRow keyboardRow = new KeyboardRow();
         for (int i = 0; i < languages.size(); i++) {
-            if (keyboard.size() == MAX_ROW_SIZE) {
+            if (keyboardRow.size() == MAX_ROW_SIZE) {
                 keyboardRow = new KeyboardRow();
                 keyboard.add(keyboardRow);
             }
             keyboardRow.add(new KeyboardButton(languages.get(i)));
         }
-
         replyKeyboardMarkup.setKeyboard(keyboard);
+        logger.debug("Language buttons have been successfully set to message " + response.toString());
     }
 }

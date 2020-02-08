@@ -17,16 +17,23 @@ public class YandexTranslator implements Translator {
     private static String url;
     private static String key;
     private static final Logger logger = Logger.getLogger(YandexTranslator.class);
+    private static Translator translator;
 
-    static {
+    private YandexTranslator() {
         setProperties();
     }
 
-    public YandexTranslator() {
+    public static Translator getInstance() {
+        if (translator == null) {
+            translator = new YandexTranslator();
+            logger.info("Translator instance created");
+        }
+        return translator;
     }
 
     @Override
     public String translate(String message, String lang) throws IOException {
+        logger.debug("Starting translating text: " + message + ". Translation lang: " + lang);
         URL urlObj = new URL(url + "translate?key=" + key);
         HttpsURLConnection connection = (HttpsURLConnection) urlObj.openConnection();
         connection.setRequestMethod("POST");
@@ -40,17 +47,13 @@ public class YandexTranslator implements Translator {
         String text = getTextFromJson(json);
         out.close();
         response.close();
+        logger.debug("Text successfully translated. Translated text: " + text);
         return text;
     }
 
     private String getTextFromJson(String json) {
         Gson gson = new Gson();
         Message message = gson.fromJson(json, Message.class);
-        logger.debug(new StringJoiner("")
-                             .add("Translation result:\nStatus-code: ")
-                             .add(String.valueOf(message.getCode()))
-                             .add(" , lang:").add(message.getLang())
-                             .add(", text:").add(message.getText()));
         return message.getText();
     }
 
@@ -61,7 +64,8 @@ public class YandexTranslator implements Translator {
             url = prop.getProperty("url");
             key = prop.getProperty("key");
         } catch (IOException e) {
-            logger.error("An error occurred while loading translator properties: ", e);
+            logger.error("An error occurred while loading translator properties", e);
         }
+        logger.info("Translator properties set successfully");
     }
 }

@@ -12,6 +12,8 @@ import domain.utils.LocalizationUtils;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.User;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 
 import java.util.ResourceBundle;
 import java.util.StringJoiner;
@@ -22,7 +24,6 @@ public class CommandExecutor {
     private BotUserService userService = new BotUserService();
 
     public void start(User user, SendMessage response) throws DAOException {
-        logger.trace("Executing the start command");
         BotUser botUser = userService.findUser(user.getId());
         if (botUser == null) {
             botUser = new BotUser(user.getId(),
@@ -39,11 +40,9 @@ public class CommandExecutor {
                                            .add(resBundle.getString("introduction"))
                                            .toString();
         response.setText(text);
-        logger.trace("The start command was successfully executed");
     }
 
     public void help(User user, SendMessage response) throws DAOException {
-        logger.trace("Executing the help command");
         BotUser botUser = userService.findUser(user.getId());
         CommandType[] commands = CommandType.values();
         StringBuilder text = new StringBuilder();
@@ -54,7 +53,6 @@ public class CommandExecutor {
             text.append("/").append(command).append(" - ").append(resBundle.getString(command)).append("\n");
         }
         response.setText(text.toString());
-        logger.trace("The help command was successfully executed");
     }
 
     public void langInfo(User user, SendMessage response) throws DAOException {
@@ -68,11 +66,9 @@ public class CommandExecutor {
                                            .add(LocalizationUtils.getLangName(botUser.getTranslationLang(), code))
                                            .toString();
         response.setText(text);
-        logger.trace("The langinfo command was successfully executed");
     }
 
     public void setMyLang(User user, String argument, SendMessage response, Command command) throws DAOException {
-        logger.trace("Executing the setmylang command");
         if (argument == null) {
             ButtonSetter.setButtons(response, ButtonTemplate.LANGUAGES);
             response.setText(LocalizationUtils.getResourceBundle(user.getLanguageCode(), "strings").getString("chooseLang"));
@@ -84,20 +80,19 @@ public class CommandExecutor {
         BotUser botUser = userService.findUser(user.getId());
         if(!isValidArgument(argument)){
             response.setText(ErrorMessageUtils.getMessage(botUser.getLanguageCode(), ErrorMessage.UNKNOWN_LANG));
+            logger.debug("Argument '" + argument + "' is invalid. Sending error message");
             return;
         }
+
         botUser.setLanguageCode(argument);
         userService.updateUser(botUser);
         String code = botUser.getLanguageCode();
-        String text = LocalizationUtils.getStringByKeys(code, "done", "yourLangNow") + LocalizationUtils.getLangName(
-                code, code);
+        String text = LocalizationUtils.getStringByKeys(code, "done", "yourLangNow") + LocalizationUtils.getLangName(code, code);
         response.setText(text);
-        logger.trace("The setmylang command was successfully executed");
-
+        response.setReplyMarkup(new ReplyKeyboardMarkup());
     }
 
     public void toLang(User user, String argument, SendMessage response, Command command) throws DAOException {
-        logger.trace("Executing the tolang command");
         if (argument == null) {
             ButtonSetter.setButtons(response, ButtonTemplate.LANGUAGES);
             response.setText(LocalizationUtils.getResourceBundle(user.getLanguageCode(), "strings").getString("chooseLang"));
@@ -109,15 +104,17 @@ public class CommandExecutor {
         BotUser botUser = userService.findUser(user.getId());
         if(!isValidArgument(argument)){
             response.setText(ErrorMessageUtils.getMessage(botUser.getLanguageCode(), ErrorMessage.UNKNOWN_LANG));
+            logger.debug("Argument '" + argument + "' is invalid. Sending error message");
             return;
         }
+
         botUser.setTranslationLang(argument);
         userService.updateUser(botUser);
         String code = botUser.getLanguageCode();
         String text = LocalizationUtils.getStringByKeys(code, "done", "yourTargetLangNow")
                 + LocalizationUtils.getLangName(botUser.getTranslationLang(), code);
         response.setText(text);
-        logger.trace("The tolang command was successfully executed");
+        response.setReplyMarkup(new ReplyKeyboardRemove());
     }
 
     private boolean isValidArgument(String arg){
