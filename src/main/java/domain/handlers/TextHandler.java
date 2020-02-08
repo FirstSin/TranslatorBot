@@ -7,10 +7,8 @@ import domain.model.BotUser;
 import domain.model.Translator;
 import domain.model.YandexTranslator;
 import domain.utils.ArgumentsWaiter;
-import domain.utils.LocalizationUtils;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.io.IOException;
@@ -28,10 +26,11 @@ public class TextHandler implements Handler {
     @Override
     public void handle(Update update, SendMessage response) {
         logger.debug("Text processing starts. " + update.toString());
-        Message message = update.getMessage();
-        long chatId = message.getChatId();
-        String text = message.getText();
-        if (argumentsWaiter.isWaiting()) {
+        int userId = update.getMessage().getFrom().getId();
+        long chatId = update.getMessage().getChatId();
+        String text = update.getMessage().getText();
+
+        if (argumentsWaiter.isWaiting(userId)) {
             redirectToCommand(update, response);
         } else {
             String translatedText = null;
@@ -53,14 +52,14 @@ public class TextHandler implements Handler {
     }
 
     private void redirectToCommand(Update update, SendMessage response){
-        Command command = argumentsWaiter.getWaitingCommand();
-        String argument = LocalizationUtils.getLangCode(update.getMessage().getText());
+        Command command = argumentsWaiter.getWaitingCommand(update.getMessage().getFrom().getId());
+        String argument = update.getMessage().getText();
         try {
             command.execute(update.getMessage().getFrom(), argument, response);
             response.setChatId(update.getMessage().getChatId());
         } catch (DAOException e) {
             logger.error("An error occurred in the DAO layer", e);
         }
-        logger.debug("The argument "+ argument + " was redirected to the " + command.toString() + " command");
+        logger.debug("The argument " + argument + " was redirected to the " + command.toString() + " command");
     }
 }

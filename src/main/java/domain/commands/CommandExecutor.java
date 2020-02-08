@@ -69,55 +69,57 @@ public class CommandExecutor {
     }
 
     public void setMyLang(User user, String argument, SendMessage response, Command command) throws DAOException {
+        BotUser botUser = userService.findUser(user.getId());
         if (argument == null) {
             ButtonSetter.setButtons(response, ButtonTemplate.LANGUAGES);
             response.setText(LocalizationUtils.getResourceBundle(user.getLanguageCode(), "strings").getString("chooseLang"));
-            argumentsWaiter.waitForArgs(command);
+            argumentsWaiter.waitForArgs(user.getId(), command);
             logger.trace("The setmylang command is waiting for arguments...");
             return;
         }
 
-        BotUser botUser = userService.findUser(user.getId());
-        if(!isValidArgument(argument)){
+        String lang;
+        try {
+            lang = LocalizationUtils.getLangCode(argument);
+        } catch (IllegalArgumentException e) {
+            logger.error("Unknown language", e);
             response.setText(ErrorMessageUtils.getMessage(botUser.getLanguageCode(), ErrorMessage.UNKNOWN_LANG));
-            logger.debug("Argument '" + argument + "' is invalid. Sending error message");
             return;
         }
 
-        botUser.setLanguageCode(argument);
+        botUser.setLanguageCode(lang);
         userService.updateUser(botUser);
         String code = botUser.getLanguageCode();
         String text = LocalizationUtils.getStringByKeys(code, "done", "yourLangNow") + LocalizationUtils.getLangName(code, code);
         response.setText(text);
-        response.setReplyMarkup(new ReplyKeyboardMarkup());
+        response.setReplyMarkup(new ReplyKeyboardRemove());
     }
 
     public void toLang(User user, String argument, SendMessage response, Command command) throws DAOException {
+        BotUser botUser = userService.findUser(user.getId());
         if (argument == null) {
             ButtonSetter.setButtons(response, ButtonTemplate.LANGUAGES);
             response.setText(LocalizationUtils.getResourceBundle(user.getLanguageCode(), "strings").getString("chooseLang"));
-            argumentsWaiter.waitForArgs(command);
+            argumentsWaiter.waitForArgs(user.getId(), command);
             logger.trace("The tolang command is waiting for arguments...");
             return;
         }
 
-        BotUser botUser = userService.findUser(user.getId());
-        if(!isValidArgument(argument)){
+        String lang;
+        try {
+            lang = LocalizationUtils.getLangCode(argument);
+        } catch (IllegalArgumentException e){
+            logger.error("Unknown language", e);
             response.setText(ErrorMessageUtils.getMessage(botUser.getLanguageCode(), ErrorMessage.UNKNOWN_LANG));
-            logger.debug("Argument '" + argument + "' is invalid. Sending error message");
             return;
         }
 
-        botUser.setTranslationLang(argument);
+        botUser.setTranslationLang(lang);
         userService.updateUser(botUser);
         String code = botUser.getLanguageCode();
         String text = LocalizationUtils.getStringByKeys(code, "done", "yourTargetLangNow")
                 + LocalizationUtils.getLangName(botUser.getTranslationLang(), code);
         response.setText(text);
         response.setReplyMarkup(new ReplyKeyboardRemove());
-    }
-
-    private boolean isValidArgument(String arg){
-        return LocalizationUtils.isAvailableCode(arg) || LocalizationUtils.isAvailableLang(arg);
     }
 }

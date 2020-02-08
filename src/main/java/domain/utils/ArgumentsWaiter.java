@@ -3,42 +3,37 @@ package domain.utils;
 import domain.commands.Command;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ArgumentsWaiter {
     private static final Logger logger = Logger.getLogger(ArgumentsWaiter.class);
-    private Deque<Command> waitingCommands;
+    private Map<Integer, Command> waitingCommands;
     private static ArgumentsWaiter argumentsWaiter;
 
     public static ArgumentsWaiter getInstance() {
         if (argumentsWaiter == null) {
             argumentsWaiter = new ArgumentsWaiter();
-            logger.info("Instance crated");
+            logger.info("Instance created");
         }
         return argumentsWaiter;
     }
 
     private ArgumentsWaiter(){
-        waitingCommands = new ArrayDeque<>();
+        waitingCommands = new HashMap<>();
     }
 
-    public boolean isWaiting() {
-        return waitingCommands.isEmpty() ? false : true;
+    public boolean isWaiting(int userId) {
+        return waitingCommands.containsKey(userId);
     }
 
-    public void waitForArgs(Command command) {
-        logger.debug("Waiting commands queue size: " + waitingCommands.size());
-        if(waitingCommands.size() >= 32) {
-            logger.debug("Clearing the queue of pending commands");
-            waitingCommands.clear();
-        }
-        waitingCommands.addLast(command);
+    public void waitForArgs(int userId, Command command) {
+        waitingCommands.put(userId, command);
     }
 
-    public Command getWaitingCommand() {
-        Command command = waitingCommands.removeLast();
-        logger.debug("Removing " + command.toString() + " command from the queue");
+    public Command getWaitingCommand(int userId) {
+        Command command = waitingCommands.remove(userId);
+        logger.debug("Getting " + command.toString() + " command from the waiting commands collection");
         return command;
     }
 }

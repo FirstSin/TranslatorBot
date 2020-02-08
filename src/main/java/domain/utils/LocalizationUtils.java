@@ -39,6 +39,8 @@ public class LocalizationUtils {
     }
 
     public static String getLangCode(String language) {
+        if(isAvailableCode(language))
+            return language;
         Enumeration<Object> keys = languages.keys();
         while (keys.hasMoreElements()) {
             String key = String.valueOf(keys.nextElement());
@@ -47,7 +49,7 @@ public class LocalizationUtils {
                 return key;
             }
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 
     public static boolean isAvailableCode(String langCode) {
