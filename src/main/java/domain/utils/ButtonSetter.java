@@ -33,9 +33,9 @@ public class ButtonSetter {
 
         List<KeyboardRow> keyboard = new ArrayList<>();
         List<String> languages = LocalizationUtils.getLanguages();
-        KeyboardRow keyboardRow = new KeyboardRow();
+        KeyboardRow keyboardRow = null;
         for (int i = 0; i < languages.size(); i++) {
-            if (keyboardRow.size() == MAX_ROW_SIZE) {
+            if (i % MAX_ROW_SIZE == 0) {
                 keyboardRow = new KeyboardRow();
                 keyboard.add(keyboardRow);
             }
