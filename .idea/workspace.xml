@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6689b11b-e13a-40fd-bdc0-597fccf88904" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/dao/utils/ConnectionUtils.java" afterDir="false" />
+    <list default="true" id="6689b11b-e13a-40fd-bdc0-597fccf88904" name="Default Changelist" comment="Added a conection pool">
       <change afterPath="$PROJECT_DIR$/src/main/java/domain/templates/ErrorMessage.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/domain/utils/ErrorMessageUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/BotUserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/BotUserDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/utils/DaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/utils/DaoFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/CommandExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/CommandExecutor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/handlers/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/handlers/CommandHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/handlers/HandlerSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/HandlerSelector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/model/TranslatorBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/model/TranslatorBot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/templates/ButtonTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/templates/ButtonTemplate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/ButtonSetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/ButtonSetter.java" afterDir="false" />
@@ -160,7 +158,7 @@
       <module name="TranslatorBot" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="domain.handlers.*" />
+          <option name="PATTERN" value="domain.utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -252,7 +250,9 @@
       <workItem from="1580909121839" duration="18007000" />
       <workItem from="1580968005706" duration="2071000" />
       <workItem from="1580970354582" duration="203000" />
-      <workItem from="1581003386854" duration="18490000" />
+      <workItem from="1581003386854" duration="18649000" />
+      <workItem from="1581181374765" duration="39000" />
+      <workItem from="1581181453176" duration="3407000" />
     </task>
     <task id="LOCAL-00001" summary="Added localization in 16 languages">
       <created>1581008360074</created>
@@ -268,7 +268,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581014623024</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added a conection pool">
+      <created>1581023411100</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1581023411100</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -277,7 +284,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added localization in 16 languages" />
     <MESSAGE value="Added language selection using buttons" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added language selection using buttons" />
+    <MESSAGE value="Added a conection pool" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a conection pool" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="179" key="#Notifications" timestamp="1580759999345">
@@ -300,6 +308,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="590" y="210" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580149201224" />
+    <state x="640" y="249" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1581181409057">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="640" y="249" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581181409057" />
     <state x="664" y="446" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1580927185889">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -316,46 +328,46 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581019794606" />
-    <state x="585" y="115" key="CommitChangelistDialog2" timestamp="1581023327448">
+    <state x="585" y="115" key="CommitChangelistDialog2" timestamp="1581185490708">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1581023327448" />
+    <state x="585" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1581185490708" />
     <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1581021543982">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1581021543982" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1581023327464">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1581185210420">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581023327464" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1581023327464">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581185210420" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1581185210420">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581023327464" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1581023327464">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581185210420" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1581185210419">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581023327464" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1581023327464">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581185210419" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1581185210420">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581023327464" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1581019191521">
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581185210420" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1581023417815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581019191521" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1581019191521">
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581023417815" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1581023417815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581019191521" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1581019191521">
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581023417815" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1581023417814">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581019191521" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1581019191521">
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581023417814" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1581023417815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581019191521" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581023417815" />
     <state x="461" y="163" key="SettingsEditor" timestamp="1581023390119">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -364,10 +376,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="669" y="162" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580153294953" />
-    <state x="859" y="542" key="com.intellij.ide.util.TipDialog" timestamp="1581003399361">
+    <state x="859" y="542" key="com.intellij.ide.util.TipDialog" timestamp="1581181466488">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="859" y="542" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581003399361" />
+    <state x="859" y="542" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581181466488" />
     <state x="690" y="287" key="extract.method.dialog" timestamp="1580146336585">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

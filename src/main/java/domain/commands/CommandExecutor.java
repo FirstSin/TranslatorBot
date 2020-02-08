@@ -4,8 +4,10 @@ import dao.exceptions.DAOException;
 import dao.services.BotUserService;
 import domain.model.BotUser;
 import domain.templates.ButtonTemplate;
+import domain.templates.ErrorMessage;
 import domain.utils.ArgumentsWaiter;
 import domain.utils.ButtonSetter;
+import domain.utils.ErrorMessageUtils;
 import domain.utils.LocalizationUtils;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -19,7 +21,7 @@ public class CommandExecutor {
     private ArgumentsWaiter argumentsWaiter = ArgumentsWaiter.getInstance();
     private BotUserService userService = new BotUserService();
 
-    void start(User user, SendMessage response) throws DAOException {
+    public void start(User user, SendMessage response) throws DAOException {
         logger.trace("Executing the start command");
         BotUser botUser = userService.findUser(user.getId());
         if (botUser == null) {
@@ -40,7 +42,7 @@ public class CommandExecutor {
         logger.trace("The start command was successfully executed");
     }
 
-    void help(User user, SendMessage response) throws DAOException {
+    public void help(User user, SendMessage response) throws DAOException {
         logger.trace("Executing the help command");
         BotUser botUser = userService.findUser(user.getId());
         CommandType[] commands = CommandType.values();
@@ -55,7 +57,7 @@ public class CommandExecutor {
         logger.trace("The help command was successfully executed");
     }
 
-    void langInfo(User user, SendMessage response) throws DAOException {
+    public void langInfo(User user, SendMessage response) throws DAOException {
         logger.trace("Executing the langinfo command");
         BotUser botUser = userService.findUser(user.getId());
         String code = botUser.getLanguageCode();
@@ -69,38 +71,56 @@ public class CommandExecutor {
         logger.trace("The langinfo command was successfully executed");
     }
 
-    void setMyLang(User user, String argument, SendMessage response, Command command) throws DAOException {
+    public void setMyLang(User user, String argument, SendMessage response, Command command) throws DAOException {
         logger.trace("Executing the setmylang command");
-        if(argument == null){
+        if (argument == null) {
             ButtonSetter.setButtons(response, ButtonTemplate.LANGUAGES);
             response.setText(LocalizationUtils.getResourceBundle(user.getLanguageCode(), "strings").getString("chooseLang"));
             argumentsWaiter.waitForArgs(command);
-        } else {
-            BotUser botUser = userService.findUser(user.getId());
-            botUser.setLanguageCode(argument);
-            userService.updateUser(botUser);
-            String code = botUser.getLanguageCode();
-            String text = LocalizationUtils.getStringByKeys(code,"done", "yourLangNow") + LocalizationUtils.getLangName(code, code);
-            response.setText(text);
-            logger.trace("The setmylang command was successfully executed");
+            logger.trace("The setmylang command is waiting for arguments...");
+            return;
         }
+
+        BotUser botUser = userService.findUser(user.getId());
+        if(!isValidArgument(argument)){
+            response.setText(ErrorMessageUtils.getMessage(botUser.getLanguageCode(), ErrorMessage.UNKNOWN_LANG));
+            return;
+        }
+        botUser.setLanguageCode(argument);
+        userService.updateUser(botUser);
+        String code = botUser.getLanguageCode();
+        String text = LocalizationUtils.getStringByKeys(code, "done", "yourLangNow") + LocalizationUtils.getLangName(
+                code, code);
+        response.setText(text);
+        logger.trace("The setmylang command was successfully executed");
+
     }
 
-    void toLang(User user, String argument, SendMessage response, Command command) throws DAOException {
+    public void toLang(User user, String argument, SendMessage response, Command command) throws DAOException {
         logger.trace("Executing the tolang command");
-        if(argument == null){
+        if (argument == null) {
             ButtonSetter.setButtons(response, ButtonTemplate.LANGUAGES);
             response.setText(LocalizationUtils.getResourceBundle(user.getLanguageCode(), "strings").getString("chooseLang"));
             argumentsWaiter.waitForArgs(command);
-        } else {
-            BotUser botUser = userService.findUser(user.getId());
-            botUser.setTranslationLang(argument);
-            userService.updateUser(botUser);
-            String code = botUser.getLanguageCode();
-            String text = LocalizationUtils.getStringByKeys(code,"done", "yourTargetLangNow")
-                    + LocalizationUtils.getLangName(botUser.getTranslationLang(), code);
-            response.setText(text);
-            logger.trace("The tolang command was successfully executed");
+            logger.trace("The tolang command is waiting for arguments...");
+            return;
         }
+
+        BotUser botUser = userService.findUser(user.getId());
+        if(!isValidArgument(argument)){
+            response.setText(ErrorMessageUtils.getMessage(botUser.getLanguageCode(), ErrorMessage.UNKNOWN_LANG));
+            return;
+        }
+        botUser.setTranslationLang(argument);
+        userService.updateUser(botUser);
+        String code = botUser.getLanguageCode();
+        String text = LocalizationUtils.getStringByKeys(code, "done", "yourTargetLangNow")
+                + LocalizationUtils.getLangName(botUser.getTranslationLang(), code);
+        response.setText(text);
+        logger.trace("The tolang command was successfully executed");
+    }
+
+    private boolean isValidArgument(String arg){
+        return LocalizationUtils.isAvailableCode(arg) || LocalizationUtils.isAvailableLang(arg);
     }
 }

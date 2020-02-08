@@ -4,7 +4,10 @@ import dao.exceptions.DAOException;
 import domain.commands.Command;
 import domain.commands.CommandType;
 import domain.exceptions.CommandNotFoundException;
+import domain.model.BotUser;
+import domain.templates.ErrorMessage;
 import domain.utils.CommandFactory;
+import domain.utils.ErrorMessageUtils;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -32,21 +35,21 @@ public class CommandHandler implements Handler {
         Message message = update.getMessage();
         long chatId = message.getChatId();
         String text = message.getText();
-        CommandType type = null;
+        response.setChatId(chatId).setParseMode("HTML");
+        CommandType type;
         try {
             type = defineCommandType(text);
         } catch (CommandNotFoundException e) {
             logger.error("An error occurred while defining the command: " + e + " User message: " + text);
+            return;
         }
         Command command = commandFactory.getCommand(type);
         String argument = getCommandArgument(text);
         try {
-            command.execute(update.getMessage().getFrom(), argument, response);
+            command.execute(message.getFrom(), argument, response);
         } catch (DAOException e) {
             logger.error("An error occurred in the DAO layer", e);
         }
-
-        response.setChatId(chatId).setParseMode("HTML");
         logger.trace("Command processing was successful");
     }
 

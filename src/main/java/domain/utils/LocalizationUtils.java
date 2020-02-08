@@ -42,6 +42,14 @@ public class LocalizationUtils {
         throw new IllegalArgumentException();
     }
 
+    public static boolean isAvailableCode(String langCode){
+        return getLangCodes().contains(langCode);
+    }
+
+    public static boolean isAvailableLang(String lang){
+        return getLanguages().contains(lang);
+    }
+
     public static String getLangName(String code, String userLang) {
         return Locale.forLanguageTag(code).getDisplayLanguage(Locale.forLanguageTag(userLang));
     }

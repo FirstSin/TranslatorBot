@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ButtonSetter {
+    private static final int MAX_ROW_SIZE = 4;
 
     public static void setButtons(SendMessage response, ButtonTemplate template) {
         switch (template) {
@@ -32,7 +33,7 @@ public class ButtonSetter {
         List<String> languages = LocalizationUtils.getLanguages();
         KeyboardRow keyboardRow = new KeyboardRow();
         for (int i = 0; i < languages.size(); i++) {
-            if (i % 4 == 0) {
+            if (keyboard.size() == MAX_ROW_SIZE) {
                 keyboardRow = new KeyboardRow();
                 keyboard.add(keyboardRow);
             }

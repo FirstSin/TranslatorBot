@@ -1,7 +1,7 @@
 package domain.model;
 
 import domain.handlers.Handler;
-import domain.handlers.HandlerSelector;
+import domain.utils.HandlerSelector;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -34,10 +34,13 @@ public class TranslatorBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
+        long start = System.currentTimeMillis();
         boolean isNonNull = update.getMessage().getText() != null;
         if (update.hasMessage() && isNonNull) {
-            sendMsg(update);
+
         }
+        long end = System.currentTimeMillis();
+        System.out.println(end-start);
     }
 
     public synchronized void sendMsg(Update update){
