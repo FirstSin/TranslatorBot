@@ -27,6 +27,9 @@ public class CommandFactory {
             case TOLANG:
                 command = new ToLangCommand(commandExecutor);
                 break;
+            case STAT:
+                command = new StatCommand(commandExecutor);
+                break;
         }
         return command;
     }

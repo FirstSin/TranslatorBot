@@ -15,6 +15,11 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Enumeration;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.StringJoiner;
 
@@ -51,6 +56,8 @@ public class CommandExecutor {
         text.append(resBundle.getString("header"));
         for (CommandType type : commands) {
             String command = type.getCommand();
+            if(command.equalsIgnoreCase("stat"))
+                continue;
             text.append("/").append(command).append(" - ").append(resBundle.getString(command)).append("\n");
         }
         response.setText(text.toString());
@@ -122,5 +129,26 @@ public class CommandExecutor {
                 + LocalizationUtils.getLangName(botUser.getTranslationLang(), code);
         response.setText(text);
         response.setReplyMarkup(new ReplyKeyboardRemove());
+    }
+
+    public void stat(User user, SendMessage response){
+        if(user.getId() != 870071564)
+            return;
+        try (InputStream in = new FileInputStream("src/main/resources/statistic.properties")) {
+            Properties prop = new Properties();
+            prop.load(in);
+            StringBuilder sb = new StringBuilder();
+            CommandType[] types = CommandType.values();
+            sb.append("<b>Статистика вызова команд:</b>\n");
+            for (CommandType type: types) {
+                sb.append(type.getCommand()).append(": ").append(prop.get(type.getCommand())).append("\n");
+            }
+            sb.append("\n<b>Общая статистика:</b>\n");
+            sb.append("Пользователей бота: ").append(prop.get("users"));
+            sb.append("\nПереведено слов: ").append(prop.get("translatedWords"));
+            response.setText(sb.toString());
+        } catch (IOException e) {
+            logger.error("An error occurred while loading properties: " + e.getMessage(), e);
+        }
     }
 }
