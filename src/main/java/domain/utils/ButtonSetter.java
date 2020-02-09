@@ -20,7 +20,7 @@ public class ButtonSetter {
                 setLanguageButtons(response);
                 break;
             default:
-                throw new AssertionError("The template is not found");
+                throw new AssertionError("Invalid button template");
         }
     }
 

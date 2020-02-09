@@ -19,6 +19,6 @@ public class ToLangCommand implements Command {
 
     @Override
     public String toString() {
-        return type.getCommand();
+        return type.getCommandName();
     }
 }

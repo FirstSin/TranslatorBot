@@ -124,7 +124,7 @@ public class BotUserDaoImpl implements BotUserDao {
     }
 
     private BotUser parseUser(ResultSet rs) throws DAOException {
-        BotUser user = null;
+        BotUser user;
         try {
             int userId = Integer.parseInt(rs.getString("user_id"));
             String firstName = rs.getString("first_name");

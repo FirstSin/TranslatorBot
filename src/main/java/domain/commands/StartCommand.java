@@ -8,7 +8,7 @@ public class StartCommand implements Command {
     private static final CommandType type = CommandType.START;
     private CommandExecutor executor;
 
-    public StartCommand(CommandExecutor executor){
+    public StartCommand(CommandExecutor executor) {
         this.executor = executor;
     }
 
@@ -19,6 +19,6 @@ public class StartCommand implements Command {
 
     @Override
     public String toString() {
-        return type.getCommand();
+        return type.getCommandName();
     }
 }

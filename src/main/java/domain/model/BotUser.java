@@ -5,7 +5,7 @@ public class BotUser {
     private String firstName;
     private String lastName;
     private String userName;
-    private String languageCode = "en";
+    private String languageCode;
     private String translationLang = "en";
 
     public BotUser(int userId, String firstName, String lastName, String userName, String languageCode) {
@@ -13,7 +13,7 @@ public class BotUser {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
-        this.languageCode = languageCode != null ? languageCode : this.languageCode;
+        this.languageCode = languageCode;
     }
 
     public BotUser(int userId, String firstName, String lastName, String userName, String languageCode, String translationLang) {

@@ -9,16 +9,17 @@ import java.util.*;
 
 public class LocalizationUtils {
     private static final Logger logger = Logger.getLogger(LocalizationUtils.class);
-    private static Properties languages;
+    private static Map<String, String> languages;
 
     static {
-        languages = new Properties();
+        Properties prop = new Properties();
         try (InputStream in = new FileInputStream("src/main/resources/languages.properties")) {
-            languages.load(in);
+            prop.load(in);
+            languages = parseToMap(prop);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        logger.trace("Languages have been successfully loaded from resources");
+        logger.info("Languages have been successfully loaded from resources");
     }
 
     private LocalizationUtils() {
@@ -39,17 +40,14 @@ public class LocalizationUtils {
     }
 
     public static String getLangCode(String language) {
-        if(isAvailableCode(language))
+        if (isAvailableCode(language))
             return language;
-        Enumeration<Object> keys = languages.keys();
-        while (keys.hasMoreElements()) {
-            String key = String.valueOf(keys.nextElement());
-            String value = languages.getProperty(key);
-            if (value.equalsIgnoreCase(language)) {
-                return key;
-            }
+        for (Map.Entry<String, String> entry : languages.entrySet()) {
+            if (entry.getValue().equalsIgnoreCase(language))
+                return entry.getKey();
         }
-        throw new IllegalArgumentException();
+
+        throw new IllegalArgumentException("Unsupported language");
     }
 
     public static boolean isAvailableCode(String langCode) {
@@ -65,23 +63,25 @@ public class LocalizationUtils {
     }
 
     public static List<String> getLangCodes() {
-        List<String> codes = new ArrayList<>();
-        Enumeration<Object> keys = languages.keys();
-        while (keys.hasMoreElements()) {
-            String key = String.valueOf(keys.nextElement());
-            codes.add(key);
-        }
-        return codes;
+        List<String> langCodes = new ArrayList<>(languages.size());
+        languages.forEach((k, v) -> langCodes.add(k));
+        return langCodes;
     }
 
     public static List<String> getLanguages() {
-        List<String> langs = new ArrayList<>();
-        Enumeration<Object> keys = languages.keys();
+        List<String> langs = new ArrayList<>(languages.size());
+        languages.forEach((k, v) -> langs.add(v));
+        return langs;
+    }
+
+    private static Map<String, String> parseToMap(Properties prop) {
+        Map<String, String> map = new HashMap<>(prop.size());
+        Enumeration<Object> keys = prop.keys();
         while (keys.hasMoreElements()) {
             String key = String.valueOf(keys.nextElement());
-            String langName = languages.getProperty(key);
-            langs.add(langName);
+            String value = prop.getProperty(key);
+            map.put(key, value);
         }
-        return langs;
+        return map;
     }
 }

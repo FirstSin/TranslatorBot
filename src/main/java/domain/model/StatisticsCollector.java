@@ -2,7 +2,6 @@ package domain.model;
 
 import domain.commands.Command;
 import domain.commands.CommandType;
-import domain.utils.CommandFactory;
 import org.apache.log4j.Logger;
 
 import java.io.FileOutputStream;
@@ -17,24 +16,28 @@ public class StatisticsCollector {
     private static final Logger logger = Logger.getLogger(StatisticsCollector.class);
     private static Map<String, AtomicLong> commandsCounter;
     private static AtomicLong usersCounter;
-    private static AtomicLong wordsTranslated;
+    private static AtomicLong wordsCounter;
 
     static {
         commandsCounter = new HashMap<>();
         usersCounter = new AtomicLong();
-        wordsTranslated = new AtomicLong();
+        wordsCounter = new AtomicLong();
         initializeMap();
         Thread run = new Thread(() -> {
-            while(true){
+            while (true) {
                 try {
                     writeToProps();
-                    Thread.sleep(15000);
-                } catch (InterruptedException ex) {
-                    logger.error("Thread can't sleep");
+                    Thread.sleep(60000);
+                } catch (InterruptedException e) {
+                    logger.error("Thread can't sleep", e);
                 }
             }
         });
         run.start();
+    }
+
+    private StatisticsCollector() {
+        throw new AssertionError("Cannot create an instance of a class");
     }
 
     public static void commandIncrement(Command command) {
@@ -46,7 +49,7 @@ public class StatisticsCollector {
     }
 
     public static void translatedWordIncrement() {
-        wordsTranslated.incrementAndGet();
+        wordsCounter.incrementAndGet();
     }
 
     private static void writeToProps() {
@@ -54,17 +57,16 @@ public class StatisticsCollector {
             Properties prop = new Properties();
             commandsCounter.forEach((k, v) -> prop.put(k, String.valueOf(v)));
             prop.put("users", String.valueOf(usersCounter.get()));
-            prop.put("translatedWords", String.valueOf(wordsTranslated.get()));
+            prop.put("translatedWords", String.valueOf(wordsCounter.get()));
             prop.store(out, null);
         } catch (IOException e) {
             logger.error("An error occurred while writing data to properties file", e);
         }
     }
 
-    private static void initializeMap(){
-        CommandFactory factory = new CommandFactory();
-        for (Command command: factory.getAllCommands()) {
-            commandsCounter.put(command.toString(), new AtomicLong(0));
+    private static void initializeMap() {
+        for (CommandType type : CommandType.values()) {
+            commandsCounter.put(type.getCommandName(), new AtomicLong(0));
         }
     }
 }

@@ -4,7 +4,6 @@ import dao.exceptions.DAOException;
 import dao.services.BotUserService;
 import domain.commands.Command;
 import domain.model.BotUser;
-import domain.model.StatisticsCollector;
 import domain.model.Translator;
 import domain.model.YandexTranslator;
 import domain.utils.ArgumentsWaiter;
@@ -13,6 +12,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.io.IOException;
+import java.util.StringJoiner;
 
 public class TextHandler implements Handler {
     private static final Logger logger = Logger.getLogger(TextHandler.class);
@@ -52,7 +52,7 @@ public class TextHandler implements Handler {
         return botUser.getTranslationLang();
     }
 
-    private void redirectToCommand(Update update, SendMessage response){
+    private void redirectToCommand(Update update, SendMessage response) {
         Command command = argumentsWaiter.getWaitingCommand(update.getMessage().getFrom().getId());
         String argument = update.getMessage().getText();
         try {
@@ -61,6 +61,8 @@ public class TextHandler implements Handler {
         } catch (DAOException e) {
             logger.error("An error occurred in the DAO layer", e);
         }
-        logger.debug("The argument " + argument + " was redirected to the " + command.toString() + " command");
+        logger.debug(new StringJoiner(" ").add("The argument").add(argument)
+                                          .add("was redirected to the").add(command.toString())
+                                          .add("command").toString());
     }
 }

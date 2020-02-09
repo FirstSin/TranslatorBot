@@ -31,7 +31,7 @@ public class CommandHandler implements Handler {
         try {
             type = defineCommandType(text);
         } catch (CommandNotFoundException e) {
-            logger.error("An error occurred while defining the command: " + e + " User message: " + text);
+            logger.error("An error occurred while defining the command", e);
             return;
         }
         Command command = commandFactory.getCommand(type);
@@ -41,7 +41,7 @@ public class CommandHandler implements Handler {
         } catch (DAOException e) {
             logger.error("An error occurred in the DAO layer", e);
         }
-        logger.debug(command.toString() + " command executed successfully. Response: " + response.toString());
+        logger.debug(String.format("%s command executed successfully. Response: %S", command.toString(), response.toString()));
         StatisticsCollector.commandIncrement(command);
     }
 
@@ -50,12 +50,12 @@ public class CommandHandler implements Handler {
         String command = textValues[0].replaceAll("/", "");
         CommandType[] types = CommandType.values();
         for (CommandType type : types) {
-            if (type.toString().equalsIgnoreCase(command)) {
+            if (type.getCommandName().equalsIgnoreCase(command)) {
                 logger.debug("Received command: " + command);
                 return type;
             }
         }
-        throw new CommandNotFoundException("The сommand '" + command + "' not found.");
+        throw new CommandNotFoundException("The сommand '" + command + "' not found");
     }
 
     private String getCommandArgument(String message) {

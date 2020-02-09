@@ -13,7 +13,11 @@ public class Message {
         return lang;
     }
 
-    public String getText() {
+    public String[] getText() {
+        return text;
+    }
+
+    public String getFormattedText() {
         StringBuilder sb = new StringBuilder(text.length);
         for (String str : text) {
             sb.append(str);

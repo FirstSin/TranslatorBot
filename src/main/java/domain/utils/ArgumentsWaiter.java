@@ -19,7 +19,7 @@ public class ArgumentsWaiter {
         return argumentsWaiter;
     }
 
-    private ArgumentsWaiter(){
+    private ArgumentsWaiter() {
         waitingCommands = new HashMap<>();
     }
 
@@ -33,7 +33,7 @@ public class ArgumentsWaiter {
 
     public Command getWaitingCommand(int userId) {
         Command command = waitingCommands.remove(userId);
-        logger.debug("Getting " + command.toString() + " command from the waiting commands collection");
+        logger.debug(String.format("Getting %s command from the waiting commands collection", command.toString()));
         return command;
     }
 }

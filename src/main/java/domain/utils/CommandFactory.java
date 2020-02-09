@@ -33,13 +33,4 @@ public class CommandFactory {
         }
         return command;
     }
-
-    public List<Command> getAllCommands(){
-        List<Command> commands = new ArrayList<>();
-        CommandType[] types = CommandType.values();
-        for (CommandType type: types) {
-            commands.add(getCommand(type));
-        }
-        return commands;
-    }
 }

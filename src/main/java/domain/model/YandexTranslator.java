@@ -14,8 +14,8 @@ import java.util.Scanner;
 import java.util.StringJoiner;
 
 public class YandexTranslator implements Translator {
-    private static String url;
-    private static String key;
+    private String url;
+    private String key;
     private static final Logger logger = Logger.getLogger(YandexTranslator.class);
     private static Translator translator;
 
@@ -39,29 +39,29 @@ public class YandexTranslator implements Translator {
         connection.setRequestMethod("POST");
         connection.setDoOutput(true);
         DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-        out.writeBytes(new StringJoiner("")
-                               .add("text=").add(URLEncoder.encode(message, "UTF-8"))
-                               .add("&lang=").add(lang).toString());
+        out.writeBytes("text=" + URLEncoder.encode(message, "UTF-8") + "&lang=" + lang);
         InputStream response = connection.getInputStream();
         String json = new Scanner(response).nextLine();
         String text = getTextFromJson(json);
         out.close();
         response.close();
         logger.debug("Text successfully translated. Translated text: " + text);
+
         final int textLength = text.split(" ").length;
         for (int i = 0; i < textLength; i++) {
             StatisticsCollector.translatedWordIncrement();
         }
+
         return text;
     }
 
     private String getTextFromJson(String json) {
         Gson gson = new Gson();
         Message message = gson.fromJson(json, Message.class);
-        return message.getText();
+        return message.getFormattedText();
     }
 
-    private static void setProperties() {
+    private void setProperties() {
         try (InputStream in = new FileInputStream("src/main/resources/translator.properties")) {
             Properties prop = new Properties();
             prop.load(in);

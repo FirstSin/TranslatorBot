@@ -18,7 +18,6 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRem
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Enumeration;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.StringJoiner;
@@ -50,12 +49,12 @@ public class CommandExecutor {
 
     public void help(User user, SendMessage response) throws DAOException {
         BotUser botUser = userService.findUser(user.getId());
-        CommandType[] commands = CommandType.values();
         StringBuilder text = new StringBuilder();
         ResourceBundle resBundle = LocalizationUtils.getResourceBundle(botUser.getLanguageCode(), "commands");
-        text.append(resBundle.getString("header"));
-        for (CommandType type : commands) {
-            String command = type.getCommand();
+
+        text.append("<b>").append(resBundle.getString("header")).append(":</b>\n");
+        for (CommandType type : CommandType.values()) {
+            String command = type.getCommandName();
             if(command.equalsIgnoreCase("stat"))
                 continue;
             text.append("/").append(command).append(" - ").append(resBundle.getString(command)).append("\n");
@@ -64,15 +63,13 @@ public class CommandExecutor {
     }
 
     public void langInfo(User user, SendMessage response) throws DAOException {
-        logger.trace("Executing the langinfo command");
         BotUser botUser = userService.findUser(user.getId());
         String code = botUser.getLanguageCode();
         ResourceBundle resBundle = LocalizationUtils.getResourceBundle(code, "strings");
-        String text = new StringJoiner("").add(resBundle.getString("userLang")).add(" ")
-                                           .add(LocalizationUtils.getLangName(code, code)).add("\n")
-                                           .add(resBundle.getString("targetLang")).add(" ")
-                                           .add(LocalizationUtils.getLangName(botUser.getTranslationLang(), code))
-                                           .toString();
+        String text = resBundle.getString("userLang") + " " +
+                LocalizationUtils.getLangName(code, code) + "\n" +
+                resBundle.getString("targetLang") + " " +
+                LocalizationUtils.getLangName(botUser.getTranslationLang(), code);
         response.setText(text);
     }
 
@@ -90,7 +87,7 @@ public class CommandExecutor {
         try {
             lang = LocalizationUtils.getLangCode(argument);
         } catch (IllegalArgumentException e) {
-            logger.error("Unknown language", e);
+            logger.error("An error occurred when determining the language code", e);
             response.setText(ErrorMessageUtils.getMessage(botUser.getLanguageCode(), ErrorMessage.UNKNOWN_LANG));
             return;
         }
@@ -117,7 +114,7 @@ public class CommandExecutor {
         try {
             lang = LocalizationUtils.getLangCode(argument);
         } catch (IllegalArgumentException e){
-            logger.error("Unknown language", e);
+            logger.error("An error occurred when determining the language code", e);
             response.setText(ErrorMessageUtils.getMessage(botUser.getLanguageCode(), ErrorMessage.UNKNOWN_LANG));
             return;
         }
@@ -131,24 +128,24 @@ public class CommandExecutor {
         response.setReplyMarkup(new ReplyKeyboardRemove());
     }
 
-    public void stat(User user, SendMessage response){
-        if(user.getId() != 870071564)
-            return;
+    public void stat(SendMessage response){
+        Properties prop;
         try (InputStream in = new FileInputStream("src/main/resources/statistic.properties")) {
-            Properties prop = new Properties();
+            prop = new Properties();
             prop.load(in);
-            StringBuilder sb = new StringBuilder();
-            CommandType[] types = CommandType.values();
-            sb.append("<b>Статистика вызова команд:</b>\n");
-            for (CommandType type: types) {
-                sb.append(type.getCommand()).append(": ").append(prop.get(type.getCommand())).append("\n");
-            }
-            sb.append("\n<b>Общая статистика:</b>\n");
-            sb.append("Пользователей бота: ").append(prop.get("users"));
-            sb.append("\nПереведено слов: ").append(prop.get("translatedWords"));
-            response.setText(sb.toString());
         } catch (IOException e) {
-            logger.error("An error occurred while loading properties: " + e.getMessage(), e);
+            logger.error("An error occurred while loading statistic properties", e);
+            return;
         }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("<b>Статистика вызова команд:</b>\n");
+        for (CommandType type: CommandType.values()) {
+            sb.append(type.getCommandName()).append(": ").append(prop.get(type.getCommandName())).append("\n");
+        }
+        sb.append("\n<b>Общая статистика:</b>\n");
+        sb.append("Пользователей бота: ").append(prop.get("users"));
+        sb.append("\nПереведено слов: ").append(prop.get("translatedWords"));
+        response.setText(sb.toString());
     }
 }

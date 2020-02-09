@@ -1,6 +1,5 @@
 package domain.commands;
 
-import dao.exceptions.DAOException;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.User;
 
@@ -13,12 +12,12 @@ public class StatCommand implements Command {
     }
 
     @Override
-    public void execute(User user, String argument, SendMessage response) throws DAOException {
-        executor.stat(user, response);
+    public void execute(User user, String argument, SendMessage response) {
+        executor.stat(response);
     }
 
     @Override
     public String toString() {
-        return type.getCommand();
+        return type.getCommandName();
     }
 }

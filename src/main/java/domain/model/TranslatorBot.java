@@ -48,7 +48,7 @@ public class TranslatorBot extends TelegramLongPollingBot {
         try {
             execute(response);
         } catch (TelegramApiException e) {
-            logger.error("Problems with execution:\n" + e);
+            logger.error("Problems with execution", e);
         }
         logger.trace("the message was successfully processed and sent");
     }

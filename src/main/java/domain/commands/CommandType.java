@@ -1,26 +1,20 @@
 package domain.commands;
 
 public enum CommandType {
-    START("start", "Start using the bot"),
-    HELP("help", "Displays a list of all available commands"),
-    LANGINFO("langinfo", "Displays the language of the bot"),
-    SETMYLANG("setmylang", "Changes the language of the bot"),
-    TOLANG("tolang", "Set translation language"),
-    STAT("stat", "description");
+    START("start"),
+    HELP("help"),
+    LANGINFO("langinfo"),
+    SETMYLANG("setmylang"),
+    TOLANG("tolang"),
+    STAT("stat");
 
-    private String command;
-    private String description;
+    private String commandName;
 
-    CommandType(String command, String description) {
-        this.command = command;
-        this.description = description;
+    CommandType(String commandName) {
+        this.commandName = commandName;
     }
 
-    public String getCommand() {
-        return command;
-    }
-
-    public String getDescription() {
-        return description;
+    public String getCommandName() {
+        return commandName;
     }
 }
