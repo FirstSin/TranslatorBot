@@ -3,6 +3,7 @@ package domain.commands;
 import dao.exceptions.DAOException;
 import dao.services.BotUserService;
 import domain.model.BotUser;
+import domain.model.StatisticsCollector;
 import domain.templates.ButtonTemplate;
 import domain.templates.ErrorMessage;
 import domain.utils.ArgumentsWaiter;
@@ -12,7 +13,6 @@ import domain.utils.LocalizationUtils;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.User;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 
 import java.util.ResourceBundle;
@@ -32,6 +32,7 @@ public class CommandExecutor {
                                   user.getUserName(),
                                   user.getLanguageCode());
             userService.saveUser(botUser);
+            StatisticsCollector.userIncrement();
         }
         ResourceBundle resBundle = LocalizationUtils.getResourceBundle(botUser.getLanguageCode(), "strings");
         String text = new StringJoiner(" ").add(resBundle.getString("greeting"))
@@ -72,7 +73,7 @@ public class CommandExecutor {
         BotUser botUser = userService.findUser(user.getId());
         if (argument == null) {
             ButtonSetter.setButtons(response, ButtonTemplate.LANGUAGES);
-            response.setText(LocalizationUtils.getResourceBundle(user.getLanguageCode(), "strings").getString("chooseLang"));
+            response.setText(LocalizationUtils.getResourceBundle(botUser.getLanguageCode(), "strings").getString("chooseLang"));
             argumentsWaiter.waitForArgs(user.getId(), command);
             logger.trace("The setmylang command is waiting for arguments...");
             return;
@@ -99,7 +100,7 @@ public class CommandExecutor {
         BotUser botUser = userService.findUser(user.getId());
         if (argument == null) {
             ButtonSetter.setButtons(response, ButtonTemplate.LANGUAGES);
-            response.setText(LocalizationUtils.getResourceBundle(user.getLanguageCode(), "strings").getString("chooseLang"));
+            response.setText(LocalizationUtils.getResourceBundle(botUser.getLanguageCode(), "strings").getString("chooseLang"));
             argumentsWaiter.waitForArgs(user.getId(), command);
             logger.trace("The tolang command is waiting for arguments...");
             return;

@@ -17,11 +17,8 @@ public class StartCommand implements Command {
         executor.start(user, response);
     }
 
-    public String getCommand() {
+    @Override
+    public String toString() {
         return type.getCommand();
-    }
-
-    public String getDescription() {
-        return type.getDescription();
     }
 }

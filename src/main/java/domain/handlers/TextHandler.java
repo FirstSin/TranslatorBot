@@ -4,6 +4,7 @@ import dao.exceptions.DAOException;
 import dao.services.BotUserService;
 import domain.commands.Command;
 import domain.model.BotUser;
+import domain.model.StatisticsCollector;
 import domain.model.Translator;
 import domain.model.YandexTranslator;
 import domain.utils.ArgumentsWaiter;

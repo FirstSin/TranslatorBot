@@ -3,6 +3,8 @@ package domain.utils;
 import domain.commands.*;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommandFactory {
     private CommandExecutor commandExecutor = new CommandExecutor();
@@ -27,5 +29,14 @@ public class CommandFactory {
                 break;
         }
         return command;
+    }
+
+    public List<Command> getAllCommands(){
+        List<Command> commands = new ArrayList<>();
+        CommandType[] types = CommandType.values();
+        for (CommandType type: types) {
+            commands.add(getCommand(type));
+        }
+        return commands;
     }
 }

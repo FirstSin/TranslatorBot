@@ -48,6 +48,10 @@ public class YandexTranslator implements Translator {
         out.close();
         response.close();
         logger.debug("Text successfully translated. Translated text: " + text);
+        final int textLength = text.split(" ").length;
+        for (int i = 0; i < textLength; i++) {
+            StatisticsCollector.translatedWordIncrement();
+        }
         return text;
     }
 

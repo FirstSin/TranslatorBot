@@ -2,11 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6689b11b-e13a-40fd-bdc0-597fccf88904" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain/model/StatisticsCollector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/statistic.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/CommandExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/CommandExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/HelpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/LangInfoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/LangInfoCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/SetMyLangCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/SetMyLangCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/StartCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/StartCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/ToLangCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/ToLangCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/handlers/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/handlers/CommandHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/handlers/TextHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/handlers/TextHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/ArgumentsWaiter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/ArgumentsWaiter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/LocalizationUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/LocalizationUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/model/YandexTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/model/YandexTranslator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/CommandFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/CommandFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/languages.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/languages.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterDir="false" />
     </list>
@@ -113,7 +121,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../DatabaseProgram" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Test" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -121,14 +129,27 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\JavaProjects\TranslatorBot\src\main\resources\languages" />
       <recent name="D:\JavaProjects\TranslatorBot\src\main\resources" />
+      <recent name="D:\JavaProjects\TranslatorBot\src\main\resources\languages" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="TranslatorBot" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StatisticsCollector" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="domain.model.StatisticsCollector" />
+      <module name="TranslatorBot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="domain.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -157,10 +178,12 @@
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.TextHandler" />
       <item itemvalue="Application.TranslatorBot" />
+      <item itemvalue="Application.StatisticsCollector" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.StatisticsCollector" />
         <item itemvalue="Application.TextHandler" />
         <item itemvalue="Application.TranslatorBot" />
       </list>
@@ -233,7 +256,8 @@
       <workItem from="1581003386854" duration="18649000" />
       <workItem from="1581181374765" duration="39000" />
       <workItem from="1581181453176" duration="3749000" />
-      <workItem from="1581185872584" duration="15016000" />
+      <workItem from="1581185872584" duration="15968000" />
+      <workItem from="1581251061191" duration="7379000" />
     </task>
     <task id="LOCAL-00001" summary="Added localization in 16 languages">
       <created>1581008360074</created>
@@ -284,7 +308,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581198327814</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Fixed bug with ignoring error messages">
+      <created>1581201014958</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1581201014958</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -298,7 +329,8 @@
     <MESSAGE value="Messages are processed in parallel" />
     <MESSAGE value="More logging" />
     <MESSAGE value="Fixed a bug with displaying 3 row instead of 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed a bug with displaying 3 row instead of 4" />
+    <MESSAGE value="Fixed bug with ignoring error messages" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug with ignoring error messages" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="179" key="#Notifications" timestamp="1580759999345">
@@ -313,10 +345,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580970552688" />
-    <state x="765" y="230" key="#com.intellij.ide.util.MemberChooser" timestamp="1581022249134">
+    <state x="765" y="230" key="#com.intellij.ide.util.MemberChooser" timestamp="1581260561818">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="230" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1581022249134" />
+    <state x="765" y="230" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1581260561818" />
     <state x="590" y="210" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1580149201224">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -345,46 +377,46 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581019794606" />
-    <state x="585" y="115" key="CommitChangelistDialog2" timestamp="1581198326810">
+    <state x="585" y="115" key="CommitChangelistDialog2" timestamp="1581201013804">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1581198326810" />
-    <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1581021543982">
+    <state x="585" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1581201013804" />
+    <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1581251733580">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1581021543982" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1581200757737">
+    <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1581251733580" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1581260728998">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581200757737" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1581200757737">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581260728998" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1581260728998">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581200757737" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1581200757737">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581260728998" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1581260728998">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581200757737" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1581200757737">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581260728998" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1581260728998">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581200757737" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1581198841381">
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581260728998" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1581259308016">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581198841381" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1581198841381">
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581259308016" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1581259308016">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581198841381" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1581198841381">
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581259308016" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1581259308016">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581198841381" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1581198841381">
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581259308016" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1581259308016">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581198841381" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581259308016" />
     <state x="461" y="163" key="SettingsEditor" timestamp="1581023390119">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -393,10 +425,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="669" y="162" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580153294953" />
-    <state x="859" y="542" key="com.intellij.ide.util.TipDialog" timestamp="1581185884177">
+    <state x="859" y="542" key="com.intellij.ide.util.TipDialog" timestamp="1581251091631">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="859" y="542" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581185884177" />
+    <state x="859" y="542" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581251091631" />
     <state x="690" y="287" key="extract.method.dialog" timestamp="1580146336585">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

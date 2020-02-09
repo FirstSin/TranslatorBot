@@ -17,11 +17,8 @@ public class SetMyLangCommand implements Command {
         executor.setMyLang(user, argument, response, this);
     }
 
-    public String getCommand() {
+    @Override
+    public String toString() {
         return type.getCommand();
-    }
-
-    public String getDescription() {
-        return type.getDescription();
     }
 }
