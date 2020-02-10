@@ -3,13 +3,11 @@ package dao.utils;
 import org.apache.log4j.Logger;
 import org.postgresql.ds.PGPooledConnection;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class ConnectionUtils {
     private static final Logger logger = Logger.getLogger(ConnectionUtils.class);
@@ -19,11 +17,16 @@ public class ConnectionUtils {
     private static PGPooledConnection source;
 
     static {
-        setProperties();
+        try {
+            setProperties();
+        } catch (URISyntaxException e) {
+            logger.error("Problems with heroku database", e);
+        }
         logger.info("Connection properties set successfully");
     }
 
     private ConnectionUtils() {
+        throw new AssertionError("Cannot create an instance of a class");
     }
 
     public static Connection getConnection() throws SQLException {
@@ -38,15 +41,10 @@ public class ConnectionUtils {
         connection.close();
     }
 
-    private static void setProperties() {
-        try (InputStream in = new FileInputStream("src/main/resources/connection.properties")) {
-            Properties prop = new Properties();
-            prop.load(in);
-            name = prop.getProperty("username");
-            url = prop.getProperty("url");
-            password = prop.getProperty("password");
-        } catch (IOException e) {
-            logger.error("An error occurred while loading connection properties", e);
-        }
+    private static void setProperties() throws URISyntaxException {
+        URI dbUri = new URI(System.getenv("DATABASE_URL"));
+        name = dbUri.getUserInfo().split(":")[0];
+        password = dbUri.getUserInfo().split(":")[1];
+        url = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath() + "?sslmode=require";
     }
 }

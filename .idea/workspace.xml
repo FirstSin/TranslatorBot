@@ -2,54 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6689b11b-e13a-40fd-bdc0-597fccf88904" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/BotUserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/BotUserDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/CommandExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/CommandExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/CommandType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/CommandType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/HelpCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/LangInfoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/LangInfoCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/SetMyLangCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/SetMyLangCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/StartCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/StartCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/StatCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/StatCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/commands/ToLangCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/commands/ToLangCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/handlers/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/handlers/CommandHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/handlers/TextHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/handlers/TextHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/model/BotUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/model/BotUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/model/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/model/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/model/StatisticsCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/model/StatisticsCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/model/Translator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/model/Translator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/model/TranslatorBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/model/TranslatorBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/model/YandexTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/model/YandexTranslator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/templates/ButtonTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/templates/ButtonTemplate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/templates/ErrorMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/templates/ErrorMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/ArgumentsWaiter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/ArgumentsWaiter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/ButtonSetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/ButtonSetter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/CommandFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/CommandFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/ErrorMessageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/ErrorMessageUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/utils/LocalizationUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/utils/LocalizationUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/commands.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/commands.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/commands_ar.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/commands_ar.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/commands_bn.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/commands_bn.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/commands_cs.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/commands_cs.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/commands_de.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/commands_de.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/commands_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/commands_en.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/commands_es.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/commands_es.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/commands_et.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/commands_et.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/commands_fr.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/commands_fr.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/commands_hi.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/commands_hi.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/commands_it.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/commands_it.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/commands_ja.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/commands_ja.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/commands_ko.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/commands_ko.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/commands_pt.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/commands_pt.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/commands_ru.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/commands_ru.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/commands_vi.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/commands_vi.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/localization/commands_zh.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/localization/commands_zh.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/utils/ConnectionUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/utils/ConnectionUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/connection.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/statistic.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/statistic.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/log4j.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,6 +108,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -287,6 +246,7 @@
       <workItem from="1581185872584" duration="15968000" />
       <workItem from="1581251061191" duration="17648000" />
       <workItem from="1581272278429" duration="537000" />
+      <workItem from="1581358579928" duration="471000" />
     </task>
     <task id="LOCAL-00001" summary="Added localization in 16 languages">
       <created>1581008360074</created>
@@ -365,6 +325,7 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Added localization in 16 languages" />
     <MESSAGE value="Added language selection using buttons" />
     <MESSAGE value="Added a conection pool" />
@@ -426,10 +387,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581012723126" />
-    <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1581019794606">
+    <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1581358627357">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581019794606" />
+    <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581358627357" />
     <state x="585" y="115" key="CommitChangelistDialog2" timestamp="1581263016172">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
