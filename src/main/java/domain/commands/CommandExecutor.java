@@ -3,7 +3,7 @@ package domain.commands;
 import dao.exceptions.DAOException;
 import dao.services.BotUserService;
 import domain.model.BotUser;
-import domain.model.StatisticsCollector;
+import domain.utils.StatisticsCollector;
 import domain.templates.ButtonTemplate;
 import domain.templates.ErrorMessage;
 import domain.utils.ArgumentsWaiter;

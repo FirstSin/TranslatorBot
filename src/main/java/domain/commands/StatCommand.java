@@ -4,7 +4,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.User;
 
 public class StatCommand implements Command {
-    private static CommandType type = CommandType.TOLANG;
+    private static CommandType type = CommandType.STAT;
     private CommandExecutor executor;
 
     public StatCommand(CommandExecutor executor) {
