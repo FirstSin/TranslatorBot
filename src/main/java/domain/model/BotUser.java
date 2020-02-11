@@ -13,7 +13,7 @@ public class BotUser {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
-        this.languageCode = languageCode;
+        this.languageCode = languageCode == null ? "en" : languageCode;
     }
 
     public BotUser(int userId, String firstName, String lastName, String userName, String languageCode, String translationLang) {
