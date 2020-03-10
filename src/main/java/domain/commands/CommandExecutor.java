@@ -2,23 +2,17 @@ package domain.commands;
 
 import dao.exceptions.DAOException;
 import dao.services.BotUserService;
+import dao.services.StatisticsService;
 import domain.model.BotUser;
-import domain.utils.StatisticsCollector;
+import domain.model.Statistics;
 import domain.templates.ButtonTemplate;
 import domain.templates.ErrorMessage;
-import domain.utils.ArgumentsWaiter;
-import domain.utils.ButtonSetter;
-import domain.utils.ErrorMessageUtils;
-import domain.utils.LocalizationUtils;
+import domain.utils.*;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.StringJoiner;
 
@@ -26,6 +20,7 @@ public class CommandExecutor {
     private static final Logger logger = Logger.getLogger(CommandExecutor.class);
     private ArgumentsWaiter argumentsWaiter = ArgumentsWaiter.getInstance();
     private BotUserService userService = new BotUserService();
+    private StatisticsService statService = new StatisticsService();
 
     public void start(User user, SendMessage response) throws DAOException {
         BotUser botUser = userService.findUser(user.getId());
@@ -129,23 +124,21 @@ public class CommandExecutor {
     }
 
     public void stat(SendMessage response){
-        Properties prop;
-        try (InputStream in = new FileInputStream("src/main/resources/statistic.properties")) {
-            prop = new Properties();
-            prop.load(in);
-        } catch (IOException e) {
-            logger.error("An error occurred while loading statistic properties", e);
-            return;
+        try {
+            Statistics statistics = statService.getStatistics();
+            StringBuilder sb = new StringBuilder();
+            sb.append("<b>Статистика вызова команд:</b>\n");
+            sb.append("start: ").append(statistics.getStartCount());
+            sb.append("\nhelp: ").append(statistics.getHelpCount());
+            sb.append("\nlanginfo: ").append(statistics.getLangInfoCount());
+            sb.append("\nsetmylang: ").append(statistics.getSetMyLangCount());
+            sb.append("\ntolang: ").append(statistics.getToLangCount());
+            sb.append("\n\n<b>Общая статистика:</b>\n");
+            sb.append("Пользователей бота: ").append(statistics.getUsersCount());
+            sb.append("\nПереведено слов: ").append(statistics.getTranslatedWordsCount());
+            response.setText(sb.toString());
+        } catch (DAOException e) {
+            logger.error("Can't get statistics", e);
         }
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("<b>Статистика вызова команд:</b>\n");
-        for (CommandType type: CommandType.values()) {
-            sb.append(type.getCommandName()).append(": ").append(prop.get(type.getCommandName())).append("\n");
-        }
-        sb.append("\n<b>Общая статистика:</b>\n");
-        sb.append("Пользователей бота: ").append(prop.get("users"));
-        sb.append("\nПереведено слов: ").append(prop.get("translatedWords"));
-        response.setText(sb.toString());
     }
 }

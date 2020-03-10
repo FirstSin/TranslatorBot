@@ -1,6 +1,7 @@
 package domain.model;
 
 import com.google.gson.Gson;
+import domain.utils.StatisticsCollector;
 import org.apache.log4j.Logger;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -11,7 +12,6 @@ import java.io.InputStream;
 import java.net.*;
 import java.util.Properties;
 import java.util.Scanner;
-import java.util.StringJoiner;
 
 public class YandexTranslator implements Translator {
     private String url;
@@ -46,12 +46,7 @@ public class YandexTranslator implements Translator {
         out.close();
         response.close();
         logger.debug("Text successfully translated. Translated text: " + text);
-
-        final int textLength = text.split(" ").length;
-        for (int i = 0; i < textLength; i++) {
-            StatisticsCollector.translatedWordIncrement();
-        }
-
+        StatisticsCollector.translatedWordAdd(text.split(" ").length);
         return text;
     }
 

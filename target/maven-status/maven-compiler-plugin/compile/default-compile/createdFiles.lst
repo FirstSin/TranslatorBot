@@ -31,7 +31,12 @@ domain\utils\HandlerSelector.class
 dao\utils\DaoFactory.class
 Main.class
 domain\templates\ErrorMessage.class
-domain\model\StatisticsCollector.class
+dao\StatisticsDao.class
+dao\StatisticsDaoImpl.class
+domain\utils\StatisticsCollector$1.class
+domain\utils\StatisticsCollector.class
 domain\utils\CommandFactory.class
 domain\commands\LangInfoCommand.class
 domain\handlers\TextHandler.class
+dao\services\StatisticsService.class
+domain\model\Statistics.class

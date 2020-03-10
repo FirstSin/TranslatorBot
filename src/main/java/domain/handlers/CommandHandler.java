@@ -4,7 +4,7 @@ import dao.exceptions.DAOException;
 import domain.commands.Command;
 import domain.commands.CommandType;
 import domain.exceptions.CommandNotFoundException;
-import domain.model.StatisticsCollector;
+import domain.utils.StatisticsCollector;
 import domain.utils.CommandFactory;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
