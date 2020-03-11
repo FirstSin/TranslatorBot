@@ -24,20 +24,18 @@ public class StatisticsCollector {
             while (true) {
                 try {
                     Statistics lastStatistics = statService.getStatistics();
-                    lastStatistics.setStartCount(lastStatistics.getStartCount() + commandsCounter.get("start").get());
-                    lastStatistics.setHelpCount(lastStatistics.getHelpCount() + commandsCounter.get("help").get());
-                    lastStatistics.setLangInfoCount(lastStatistics.getLangInfoCount() + commandsCounter.get("langinfo").get());
-                    lastStatistics.setSetMyLangCount(lastStatistics.getSetMyLangCount() + commandsCounter.get("setmylang").get());
-                    lastStatistics.setToLangCount(lastStatistics.getToLangCount() + commandsCounter.get("tolang").get());
+                    lastStatistics.setStartCount(lastStatistics.getStartCount() + commandsCounter.get("START").get());
+                    lastStatistics.setHelpCount(lastStatistics.getHelpCount() + commandsCounter.get("HELP").get());
+                    lastStatistics.setLangInfoCount(lastStatistics.getLangInfoCount() + commandsCounter.get("LANGINFO").get());
+                    lastStatistics.setSetMyLangCount(lastStatistics.getSetMyLangCount() + commandsCounter.get("SETMYLANG").get());
+                    lastStatistics.setToLangCount(lastStatistics.getToLangCount() + commandsCounter.get("TOLANG").get());
                     lastStatistics.setUsersCount(lastStatistics.getUsersCount() + usersCounter.get());
                     lastStatistics.setTranslatedWordsCount(lastStatistics.getTranslatedWordsCount() + wordsCounter.get());
                     statService.updateStatistics(lastStatistics);
                     resetLocalStatistics();
+                    Thread.sleep(30000);
                 } catch (DAOException e) {
                     logger.error("Can't update statistics", e);
-                }
-                try {
-                    Thread.sleep(10000);
                 } catch (InterruptedException e) {
                     logger.error("Thread was interrupted", e);
                 }
@@ -49,7 +47,7 @@ public class StatisticsCollector {
         commandsCounter = new HashMap<>();
         usersCounter = new AtomicLong();
         wordsCounter = new AtomicLong();
-        initializeMap();
+        initMap();
         new Thread(updatingThread).start();
     }
 
@@ -57,21 +55,21 @@ public class StatisticsCollector {
         throw new AssertionError("Cannot create an instance of a class");
     }
 
-    public static void commandIncrement(Command command) {
+    public static void incrementCommandCount(Command command) {
         commandsCounter.get(command.toString()).incrementAndGet();
     }
 
-    public static void userIncrement() {
+    public static void incrementUserCount() {
         usersCounter.incrementAndGet();
     }
 
-    public static void translatedWordAdd(long delta) {
+    public static void addTranslationWordsCount(long delta) {
         wordsCounter.addAndGet(delta);
     }
 
-    private static void initializeMap() {
+    private static void initMap() {
         for (CommandType type : CommandType.values()) {
-            commandsCounter.put(type.getCommandName(), new AtomicLong(0));
+            commandsCounter.put(type.toString(), new AtomicLong(0));
         }
     }
 

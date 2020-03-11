@@ -19,6 +19,7 @@ public class Message {
 
     public String getFormattedText() {
         StringBuilder sb = new StringBuilder(text.length);
+
         for (String str : text) {
             sb.append(str);
         }

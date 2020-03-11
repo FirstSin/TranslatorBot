@@ -1,7 +1,7 @@
 package domain.model;
 
 import domain.handlers.Handler;
-import domain.utils.HandlerSelector;
+import domain.handlers.MessageHandler;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -14,14 +14,13 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class TranslatorBot extends TelegramLongPollingBot {
-
     private static final Logger logger = Logger.getLogger(TranslatorBot.class);
     private String username;
     private String token;
     private static TranslatorBot translatorBot;
 
     private TranslatorBot() {
-        setBotProperties();
+        setProperties();
     }
 
     public static TranslatorBot getInstance() {
@@ -34,23 +33,21 @@ public class TranslatorBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        boolean isNonNull = update.getMessage().getText() != null;
-        if (update.hasMessage() && isNonNull) {
-            new Thread(() -> sendMsg(update)).start();
-        }
+        Handler handler = new MessageHandler();
+        SendMessage response = new SendMessage();
+
+        handler.handle(update, response);
+        sendMessage(response);
     }
 
-    public void sendMsg(Update update) {
-        logger.trace("Start processing the message");
-        SendMessage response = new SendMessage();
-        Handler handler = HandlerSelector.selectByMessage(update.getMessage().getText());
-        handler.handle(update, response);
+    private void sendMessage(SendMessage message) {
+        logger.trace("Sending message " + message);
         try {
-            execute(response);
+            execute(message);
         } catch (TelegramApiException e) {
-            logger.error("Problems with execution", e);
+            logger.error("Problems with message sending", e);
         }
-        logger.trace("the message was successfully processed and sent");
+        logger.trace("The message was successfully sent!");
     }
 
     @Override
@@ -64,7 +61,7 @@ public class TranslatorBot extends TelegramLongPollingBot {
     }
 
 
-    private void setBotProperties() {
+    private void setProperties() {
         try (InputStream in = new FileInputStream("src/main/resources/botinfo.properties")) {
             Properties prop = new Properties();
             prop.load(in);

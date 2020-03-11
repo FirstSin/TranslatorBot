@@ -1,5 +1,5 @@
 package domain.templates;
 
-public enum ErrorMessage {
+public enum ErrorMessageTemplate {
     UNKNOWN_LANG
 }

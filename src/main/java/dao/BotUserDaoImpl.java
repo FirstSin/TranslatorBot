@@ -2,17 +2,18 @@ package dao;
 
 import dao.exceptions.DAOException;
 import dao.utils.ConnectionUtils;
-import dao.utils.DaoFactory;
 import domain.model.BotUser;
 import org.apache.log4j.Logger;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BotUserDaoImpl implements BotUserDao {
     private static final Logger logger = Logger.getLogger(BotUserDaoImpl.class);
-    private DaoFactory daoFactory = DaoFactory.getInstance();
     private static final String SAVE_USER_QUERY = "INSERT INTO users (user_id, first_name, last_name, user_name, language_code, translation_lang) VALUES (?,?,?,?,?,?)";
     private static final String UPDATE_USER_QUERY = "UPDATE users SET language_code = ?, translation_lang = ? WHERE user_id = ?";
     private static final String DELETE_USER_QUERY = "DELETE FROM users WHERE user_id = ?";

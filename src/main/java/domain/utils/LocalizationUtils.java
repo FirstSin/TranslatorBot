@@ -10,6 +10,7 @@ import java.util.*;
 public class LocalizationUtils {
     private static final Logger logger = Logger.getLogger(LocalizationUtils.class);
     private static Map<String, String> languages;
+    private static Map<String, ResourceBundle> resBundles;
 
     static {
         Properties prop = new Properties();
@@ -20,26 +21,14 @@ public class LocalizationUtils {
             e.printStackTrace();
         }
         logger.info("Languages have been successfully loaded from resources");
+        initResourceBundles();
     }
 
     private LocalizationUtils() {
         throw new AssertionError("Cannot create an instance of a class");
     }
 
-    public static ResourceBundle getResourceBundle(String code, String name) {
-        return ResourceBundle.getBundle("localization." + name, Locale.forLanguageTag(code));
-    }
-
-    public static String getStringByKeys(String langCode, String... args) {
-        StringBuilder sb = new StringBuilder();
-        ResourceBundle resBundle = getResourceBundle(langCode, "strings");
-        for (String str : args) {
-            sb.append(resBundle.getString(str)).append(" ");
-        }
-        return sb.toString();
-    }
-
-    public static String getLangCode(String language) {
+    public static String langCodeOf(String language) {
         if (isAvailableCode(language))
             return language;
         for (Map.Entry<String, String> entry : languages.entrySet()) {
@@ -51,37 +40,39 @@ public class LocalizationUtils {
     }
 
     public static boolean isAvailableCode(String langCode) {
-        return getLangCodes().contains(langCode);
+        return languages.containsKey(langCode);
     }
 
     public static boolean isAvailableLang(String lang) {
-        return getLanguages().contains(lang);
+        return languages.containsValue(lang);
     }
 
-    public static String getLangName(String code, String userLang) {
+    public static String getNativeLangName(String code, String userLang) {
         return Locale.forLanguageTag(code).getDisplayLanguage(Locale.forLanguageTag(userLang));
     }
 
-    public static List<String> getLangCodes() {
-        List<String> langCodes = new ArrayList<>(languages.size());
-        languages.forEach((k, v) -> langCodes.add(k));
-        return langCodes;
+    public static Set<String> getAvailableLangCodes() {
+        return languages.keySet();
     }
 
-    public static List<String> getLanguages() {
-        List<String> langs = new ArrayList<>(languages.size());
-        languages.forEach((k, v) -> langs.add(v));
-        return langs;
+    public static Collection<String> getAvailableLangs() {
+        return languages.values();
+    }
+
+    public static ResourceBundle getResourceBundleByCode(String code){
+        return resBundles.get(code);
     }
 
     private static Map<String, String> parseToMap(Properties prop) {
         Map<String, String> map = new HashMap<>(prop.size());
-        Enumeration<Object> keys = prop.keys();
-        while (keys.hasMoreElements()) {
-            String key = String.valueOf(keys.nextElement());
-            String value = prop.getProperty(key);
-            map.put(key, value);
-        }
+        prop.forEach((k, v) -> map.put(String.valueOf(k), String.valueOf(v)));
         return map;
+    }
+
+    private static void initResourceBundles(){
+        resBundles = new HashMap<>(16);
+        getAvailableLangCodes().forEach(code -> {
+            resBundles.put(code, ResourceBundle.getBundle("localization.strings", Locale.forLanguageTag(code)));
+        });
     }
 }

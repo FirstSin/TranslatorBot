@@ -1,69 +1,81 @@
 package domain.handlers;
 
 import dao.exceptions.DAOException;
-import domain.commands.Command;
-import domain.commands.CommandType;
+import domain.commands.*;
 import domain.exceptions.CommandNotFoundException;
 import domain.utils.StatisticsCollector;
-import domain.utils.CommandFactory;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CommandHandler implements Handler {
-
     private static final Logger logger = Logger.getLogger(CommandHandler.class);
-    private CommandFactory commandFactory;
+    private static Map<String, Command> availableCommands;
+    private Command currentCommand;
 
-    public CommandHandler() {
-        commandFactory = new CommandFactory();
+    static {
+        initCommands();
     }
 
     @Override
     public void handle(Update update, SendMessage response) {
-        logger.trace("Command processing starts. " + update.toString());
+        logger.trace("Command processing starts");
         Message message = update.getMessage();
         long chatId = message.getChatId();
         String text = message.getText();
+
         response.setChatId(chatId).setParseMode("HTML");
-        CommandType type;
+
         try {
-            type = defineCommandType(text);
+            currentCommand = availableCommands.get(defineCommand(text));
+            currentCommand.execute(message.getFrom(), needArgument() ? getCommandArgument(text) : null, response);
         } catch (CommandNotFoundException e) {
             logger.error("An error occurred while defining the command", e);
             return;
-        }
-        Command command = commandFactory.getCommand(type);
-        String argument = getCommandArgument(text);
-        try {
-            command.execute(message.getFrom(), argument, response);
         } catch (DAOException e) {
             logger.error("An error occurred in the DAO layer", e);
+            return;
         }
-        logger.debug(String.format("%s command executed successfully. Response: %S", command.toString(), response.toString()));
-        StatisticsCollector.commandIncrement(command);
+
+        logger.trace(currentCommand + " command executed successfully");
+        StatisticsCollector.incrementCommandCount(currentCommand);
     }
 
-    private CommandType defineCommandType(String message) throws CommandNotFoundException {
-        String[] textValues = message.split(" ");
-        String command = textValues[0].replaceAll("/", "");
-        CommandType[] types = CommandType.values();
-        for (CommandType type : types) {
-            if (type.getCommandName().equalsIgnoreCase(command)) {
-                logger.debug("Received command: " + command);
-                return type;
-            }
+    private String defineCommand(String message) throws CommandNotFoundException {
+        String command = message.split(" ")[0].substring(1);
+        if (availableCommands.containsKey(command)) {
+            logger.debug("Command: " + command);
+            return command;
         }
-        throw new CommandNotFoundException("The сommand '" + command + "' not found");
+        throw new CommandNotFoundException("The command '" + message + "' not found");
     }
 
     private String getCommandArgument(String message) {
         String[] values = message.split(" ");
-        if (values.length < 2)
-            return null;
+
+        if (values.length < 2) return null;
+
         String arg = values[1];
         logger.debug("Command argument: " + arg);
         return arg;
+    }
+
+    private boolean needArgument() {
+        return String.valueOf(currentCommand).equals(CommandType.SETMYLANG.toString())
+                || String.valueOf(currentCommand).equals(CommandType.TOLANG.toString());
+    }
+
+    private static void initCommands(){
+        availableCommands = new HashMap<>();
+        availableCommands.put("start", new StartCommand());
+        availableCommands.put("help", new HelpCommand());
+        availableCommands.put("langinfo", new LangInfoCommand());
+        availableCommands.put("setmylang", new SetMyLangCommand());
+        availableCommands.put("tolang", new ToLangCommand());
+        availableCommands.put("stat", new StatCommand());
     }
 }

@@ -19,8 +19,7 @@ public class Statistics {
         this.translatedWordsCount = translatedWordsCount;
     }
 
-    public Statistics() {
-    }
+    public Statistics() { }
 
     public long getStartCount() {
         return startCount;

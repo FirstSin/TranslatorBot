@@ -9,7 +9,8 @@ import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.*;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -46,7 +47,7 @@ public class YandexTranslator implements Translator {
         out.close();
         response.close();
         logger.debug("Text successfully translated. Translated text: " + text);
-        StatisticsCollector.translatedWordAdd(text.split(" ").length);
+        StatisticsCollector.addTranslationWordsCount(text.split(" ").length);
         return text;
     }
 

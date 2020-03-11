@@ -6,7 +6,7 @@ import domain.commands.Command;
 import domain.model.BotUser;
 import domain.model.Translator;
 import domain.model.YandexTranslator;
-import domain.utils.ArgumentsWaiter;
+import domain.utils.ArgumentRequester;
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -18,7 +18,7 @@ public class TextHandler implements Handler {
     private static final Logger logger = Logger.getLogger(TextHandler.class);
     private Translator translator;
     private BotUserService userService = new BotUserService();
-    private ArgumentsWaiter argumentsWaiter = ArgumentsWaiter.getInstance();
+    private ArgumentRequester argumentRequester = ArgumentRequester.getInstance();
 
     public TextHandler() {
         translator = YandexTranslator.getInstance();
@@ -31,18 +31,19 @@ public class TextHandler implements Handler {
         long chatId = update.getMessage().getChatId();
         String text = update.getMessage().getText();
 
-        if (argumentsWaiter.isWaiting(userId)) {
+        response.setChatId(chatId).setParseMode("HTML");
+
+        if (argumentRequester.isRequested(userId)) {
             redirectToCommand(update, response);
         } else {
-            String translatedText = null;
             try {
-                translatedText = translator.translate(text, getTranslationLang(update));
+                String translatedText = translator.translate(text, getTranslationLang(update));
+                if(translatedText != null) response.setText(translatedText);
             } catch (IOException e) {
                 logger.error("An error occurred while translating the text", e);
             } catch (DAOException e) {
                 logger.error("An error occurred in the DAO layer", e);
             }
-            response.setChatId(chatId).setText(translatedText).setParseMode("HTML");
         }
         logger.debug("Text processed successfully. Response: " + response.toString());
     }
@@ -53,7 +54,7 @@ public class TextHandler implements Handler {
     }
 
     private void redirectToCommand(Update update, SendMessage response) {
-        Command command = argumentsWaiter.getWaitingCommand(update.getMessage().getFrom().getId());
+        Command command = argumentRequester.getRequestedCommand(update.getMessage().getFrom().getId());
         String argument = update.getMessage().getText();
         try {
             command.execute(update.getMessage().getFrom(), argument, response);
