@@ -2,7 +2,8 @@ package domain.model;
 
 import domain.handlers.Handler;
 import domain.handlers.MessageHandler;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -14,7 +15,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class TranslatorBot extends TelegramLongPollingBot {
-    private static final Logger logger = Logger.getLogger(TranslatorBot.class);
+    private static final Logger logger = LoggerFactory.getLogger(TranslatorBot.class);
     private String username;
     private String token;
     private static TranslatorBot translatorBot;
@@ -41,7 +42,7 @@ public class TranslatorBot extends TelegramLongPollingBot {
     }
 
     private void sendMessage(SendMessage message) {
-        logger.trace("Sending message " + message);
+        logger.trace("Sending message {}", message);
         try {
             execute(message);
         } catch (TelegramApiException e) {
@@ -68,7 +69,7 @@ public class TranslatorBot extends TelegramLongPollingBot {
             username = prop.getProperty("username");
             token = prop.getProperty("token");
         } catch (IOException e) {
-            logger.error("An error occurred while loading properties: " + e.getMessage(), e);
+            logger.error("An error occurred while loading properties", e);
         }
         logger.info("Bot properties set successfully");
     }

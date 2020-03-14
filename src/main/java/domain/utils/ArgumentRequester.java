@@ -1,13 +1,14 @@
 package domain.utils;
 
 import domain.commands.Command;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ArgumentRequester {
-    private static final Logger logger = Logger.getLogger(ArgumentRequester.class);
+    private static final Logger logger = LoggerFactory.getLogger(ArgumentRequester.class);
     private Map<Integer, Command> waitingCommands;
     private static ArgumentRequester argumentRequester;
 
@@ -33,7 +34,7 @@ public class ArgumentRequester {
 
     public Command getRequestedCommand(int userId) {
         Command command = waitingCommands.remove(userId);
-        logger.debug(String.format("Getting %s command from the waiting commands collection", command.toString()));
+        logger.debug("Getting {} command from the waiting commands collection", command.toString());
         return command;
     }
 

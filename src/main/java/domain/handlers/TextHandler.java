@@ -7,7 +7,8 @@ import domain.model.BotUser;
 import domain.model.Translator;
 import domain.model.YandexTranslator;
 import domain.utils.ArgumentRequester;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -15,7 +16,7 @@ import java.io.IOException;
 import java.util.StringJoiner;
 
 public class TextHandler implements Handler {
-    private static final Logger logger = Logger.getLogger(TextHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(TextHandler.class);
     private Translator translator;
     private BotUserService userService = new BotUserService();
     private ArgumentRequester argumentRequester = ArgumentRequester.getInstance();
@@ -26,7 +27,7 @@ public class TextHandler implements Handler {
 
     @Override
     public void handle(Update update, SendMessage response) {
-        logger.debug("Text processing starts. " + update.toString());
+        logger.debug("Text processing starts. {}", update.toString());
         int userId = update.getMessage().getFrom().getId();
         long chatId = update.getMessage().getChatId();
         String text = update.getMessage().getText();
@@ -45,7 +46,7 @@ public class TextHandler implements Handler {
                 logger.error("An error occurred in the DAO layer", e);
             }
         }
-        logger.debug("Text processed successfully. Response: " + response.toString());
+        logger.debug("Text processed successfully. Response: {}", response.toString());
     }
 
     private String getTranslationLang(Update update) throws DAOException {
@@ -62,8 +63,6 @@ public class TextHandler implements Handler {
         } catch (DAOException e) {
             logger.error("An error occurred in the DAO layer", e);
         }
-        logger.debug(new StringJoiner(" ").add("The argument").add(argument)
-                                          .add("was redirected to the").add(command.toString())
-                                          .add("command").toString());
+        logger.debug("The argument '{}' was redirected to the {} command", argument, command.toString());
     }
 }

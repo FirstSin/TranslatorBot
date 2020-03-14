@@ -1,7 +1,8 @@
 package domain.utils;
 
 import domain.templates.ButtonTemplate;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ButtonUtils {
-    private static final Logger logger = Logger.getLogger(ButtonUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(ButtonUtils.class);
     private static final int MAX_ROW_SIZE = 4;
 
     public static void setButtons(SendMessage response, ButtonTemplate template) {
@@ -45,7 +46,7 @@ public class ButtonUtils {
         }
 
         replyKeyboardMarkup.setKeyboard(keyboard);
-        logger.debug("Language buttons have been successfully set to message " + response.toString());
+        logger.debug("Language buttons have been successfully set to message {}", response.toString());
     }
 
     public static void removeButtons(SendMessage response){

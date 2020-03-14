@@ -2,8 +2,10 @@ package dao;
 
 import dao.exceptions.DAOException;
 import dao.utils.ConnectionUtils;
+import domain.handlers.MessageHandler;
 import domain.model.BotUser;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BotUserDaoImpl implements BotUserDao {
-    private static final Logger logger = Logger.getLogger(BotUserDaoImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(BotUserDaoImpl.class);
     private static final String SAVE_USER_QUERY = "INSERT INTO users (user_id, first_name, last_name, user_name, language_code, translation_lang) VALUES (?,?,?,?,?,?)";
     private static final String UPDATE_USER_QUERY = "UPDATE users SET language_code = ?, translation_lang = ? WHERE user_id = ?";
     private static final String DELETE_USER_QUERY = "DELETE FROM users WHERE user_id = ?";
@@ -22,7 +24,7 @@ public class BotUserDaoImpl implements BotUserDao {
 
     @Override
     public BotUser findById(int id) throws DAOException {
-        logger.trace("Finding user with id " + id);
+        logger.trace("Finding user with id {}", id);
         BotUser user = null;
         try {
             Connection connection = ConnectionUtils.getConnection();
@@ -32,7 +34,7 @@ public class BotUserDaoImpl implements BotUserDao {
                     if (rs.next()) {
                         user = parseUser(rs);
                     }
-                    logger.trace("User with id " + id + " were found");
+                    logger.trace("User with id {} were found", id);
                 }
             }
             ConnectionUtils.putConnection(connection);
@@ -45,7 +47,7 @@ public class BotUserDaoImpl implements BotUserDao {
 
     @Override
     public void save(BotUser user) throws DAOException {
-        logger.trace("Saving user with id " + user.getId());
+        logger.trace("Saving user with id {}", user.getId());
         try {
             Connection connection = ConnectionUtils.getConnection();
             try (PreparedStatement statement = connection.prepareStatement(SAVE_USER_QUERY)) {
@@ -56,7 +58,7 @@ public class BotUserDaoImpl implements BotUserDao {
                 statement.setString(5, user.getLanguageCode());
                 statement.setString(6, user.getTranslationLang());
                 statement.executeUpdate();
-                logger.trace("User with id " + user.getId() + " is saved.");
+                logger.trace("User with id {} is saved", user.getId());
             }
             ConnectionUtils.putConnection(connection);
         } catch (SQLException e) {
@@ -67,7 +69,7 @@ public class BotUserDaoImpl implements BotUserDao {
 
     @Override
     public void update(BotUser user) throws DAOException {
-        logger.trace("Updating user with id " + user.getId());
+        logger.trace("Updating user with id {}", user.getId());
         try {
             Connection connection = ConnectionUtils.getConnection();
             try (PreparedStatement statement = connection.prepareStatement(UPDATE_USER_QUERY)) {
@@ -75,7 +77,7 @@ public class BotUserDaoImpl implements BotUserDao {
                 statement.setString(2, user.getTranslationLang());
                 statement.setInt(3, user.getId());
                 statement.executeUpdate();
-                logger.trace("User with id " + user.getId() + " is updated.");
+                logger.trace("User with id {} is updated", user.getId());
             }
             ConnectionUtils.putConnection(connection);
         } catch (SQLException e) {
@@ -86,13 +88,13 @@ public class BotUserDaoImpl implements BotUserDao {
 
     @Override
     public void delete(BotUser user) throws DAOException {
-        logger.trace("Deleting user with id " + user.getId());
+        logger.trace("Deleting user with id {}", user.getId());
         try {
             Connection connection = ConnectionUtils.getConnection();
             try (PreparedStatement statement = connection.prepareStatement(DELETE_USER_QUERY)) {
                 statement.setInt(1, user.getId());
                 statement.executeUpdate();
-                logger.trace("User with id " + user.getId() + " is deleted.");
+                logger.trace("User with id {} is deleted", user.getId());
             }
             ConnectionUtils.putConnection(connection);
         } catch (SQLException e) {

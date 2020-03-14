@@ -4,7 +4,8 @@ import dao.exceptions.DAOException;
 import domain.commands.*;
 import domain.exceptions.CommandNotFoundException;
 import domain.utils.StatisticsCollector;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CommandHandler implements Handler {
-    private static final Logger logger = Logger.getLogger(CommandHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(CommandHandler.class);
     private static Map<String, Command> availableCommands;
     private Command currentCommand;
 
@@ -41,14 +42,14 @@ public class CommandHandler implements Handler {
             return;
         }
 
-        logger.trace(currentCommand + " command executed successfully");
+        logger.trace("{} command executed successfully", currentCommand);
         StatisticsCollector.incrementCommandCount(currentCommand);
     }
 
     private String defineCommand(String message) throws CommandNotFoundException {
         String command = message.split(" ")[0].substring(1);
         if (availableCommands.containsKey(command)) {
-            logger.debug("Command: " + command);
+            logger.debug("Command: {}", command);
             return command;
         }
         throw new CommandNotFoundException("The command '" + message + "' not found");
@@ -60,7 +61,7 @@ public class CommandHandler implements Handler {
         if (values.length < 2) return null;
 
         String arg = values[1];
-        logger.debug("Command argument: " + arg);
+        logger.debug("Command argument: '{}' ", arg);
         return arg;
     }
 

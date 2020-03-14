@@ -3,7 +3,8 @@ package dao;
 import dao.exceptions.DAOException;
 import dao.utils.ConnectionUtils;
 import domain.model.Statistics;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class StatisticsDaoImpl implements StatisticsDao {
-    private static final Logger logger = Logger.getLogger(BotUserDaoImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(StatisticsDaoImpl.class);
     private static final String SAVE_STATS_QUERY = "INSERT INTO statistics (start, help, langinfo, setmylang, tolang, users, translated_words) VALUES (?,?,?,?,?,?,?)";
     private static final String UPDATE_STATS_QUERY = "UPDATE statistics SET start = ?, help = ?, langinfo = ?, setmylang = ?, tolang = ?, users = ?, translated_words = ? WHERE id = ?";
     private static final String DELETE_STATS_QUERY = "DELETE FROM statistics WHERE id = ?";
@@ -24,7 +25,7 @@ public class StatisticsDaoImpl implements StatisticsDao {
             try (PreparedStatement statement = connection.prepareStatement(SAVE_STATS_QUERY)) {
                 setStatisticsProps(statement, statistics);
                 statement.executeUpdate();
-                logger.trace("Statistics saved.");
+                logger.trace("Statistics saved");
             }
             ConnectionUtils.putConnection(connection);
         } catch (SQLException e) {
@@ -42,7 +43,7 @@ public class StatisticsDaoImpl implements StatisticsDao {
                 setStatisticsProps(statement, statistics);
                 statement.setInt(8, 1);
                 statement.executeUpdate();
-                logger.trace("Statistics updated.");
+                logger.trace("Statistics updated");
             }
             ConnectionUtils.putConnection(connection);
         } catch (SQLException e) {
@@ -59,7 +60,7 @@ public class StatisticsDaoImpl implements StatisticsDao {
             try (PreparedStatement statement = connection.prepareStatement(DELETE_STATS_QUERY)) {
                 statement.setInt(1, 1);
                 statement.executeUpdate();
-                logger.trace("Statistics deleted.");
+                logger.trace("Statistics deleted");
             }
             ConnectionUtils.putConnection(connection);
         } catch (SQLException e) {

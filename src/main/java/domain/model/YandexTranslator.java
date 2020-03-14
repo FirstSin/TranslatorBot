@@ -2,7 +2,8 @@ package domain.model;
 
 import com.google.gson.Gson;
 import domain.utils.StatisticsCollector;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.DataOutputStream;
@@ -15,9 +16,9 @@ import java.util.Properties;
 import java.util.Scanner;
 
 public class YandexTranslator implements Translator {
+    private static final Logger logger = LoggerFactory.getLogger(YandexTranslator.class);
     private String url;
     private String key;
-    private static final Logger logger = Logger.getLogger(YandexTranslator.class);
     private static Translator translator;
 
     private YandexTranslator() {
@@ -34,7 +35,7 @@ public class YandexTranslator implements Translator {
 
     @Override
     public String translate(String message, String lang) throws IOException {
-        logger.debug("Starting translating text: " + message + ". Translation lang: " + lang);
+        logger.debug("Starting translating text: {}. Translation lang: {}", message, lang);
         URL urlObj = new URL(url + "translate?key=" + key);
         HttpsURLConnection connection = (HttpsURLConnection) urlObj.openConnection();
         connection.setRequestMethod("POST");
@@ -46,7 +47,7 @@ public class YandexTranslator implements Translator {
         String text = getTextFromJson(json);
         out.close();
         response.close();
-        logger.debug("Text successfully translated. Translated text: " + text);
+        logger.debug("Text successfully translated. Translated text: {}", text);
         StatisticsCollector.addTranslationWordsCount(text.split(" ").length);
         return text;
     }

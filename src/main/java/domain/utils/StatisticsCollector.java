@@ -5,14 +5,15 @@ import dao.services.StatisticsService;
 import domain.commands.Command;
 import domain.commands.CommandType;
 import domain.model.Statistics;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class StatisticsCollector {
-    private static final Logger logger = Logger.getLogger(StatisticsCollector.class);
+    private static final Logger logger = LoggerFactory.getLogger(StatisticsCollector.class);
     private static Map<String, AtomicLong> commandsCounter;
     private static AtomicLong usersCounter;
     private static AtomicLong wordsCounter;

@@ -1,11 +1,12 @@
 package domain.handlers;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 public class MessageHandler implements Handler {
-    private static final Logger logger = Logger.getLogger(MessageHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(MessageHandler.class);
 
     @Override
     public void handle(Update update, SendMessage response) {
@@ -19,12 +20,11 @@ public class MessageHandler implements Handler {
 
             if (isCommand) {
                 messageHandler = new CommandHandler();
-                logger.debug("Command handler was selected for the message: " + text);
             } else {
                 messageHandler = new TextHandler();
-                logger.debug("Text handler was selected for the message: " + text);
             }
 
+            logger.debug("{} was selected for the message: {}", messageHandler.getClass().getSimpleName(), text);
             messageHandler.handle(update, response);
         }
         logger.trace("The message was successfully processed");

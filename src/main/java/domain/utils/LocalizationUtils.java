@@ -1,6 +1,7 @@
 package domain.utils;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,7 +9,7 @@ import java.io.InputStream;
 import java.util.*;
 
 public class LocalizationUtils {
-    private static final Logger logger = Logger.getLogger(LocalizationUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(LocalizationUtils.class);
     private static Map<String, String> languages;
     private static Map<String, ResourceBundle> resBundles;
 
