@@ -23,8 +23,8 @@
 hs_err_pid*
 
 # IntelliJ IDEA
-out/
-.idea/
+out
+.idea
 .idea_modules/
 *.iml
 *.ipr
