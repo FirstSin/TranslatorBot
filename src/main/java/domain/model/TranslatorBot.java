@@ -13,12 +13,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class TranslatorBot extends TelegramLongPollingBot {
     private static final Logger logger = LoggerFactory.getLogger(TranslatorBot.class);
     private String username;
     private String token;
     private static TranslatorBot translatorBot;
+    private final ExecutorService executorService = Executors.newFixedThreadPool(8);
 
     private TranslatorBot() {
         setProperties();
@@ -34,11 +37,13 @@ public class TranslatorBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        Handler handler = new MessageHandler();
-        SendMessage response = new SendMessage();
+        executorService.submit(() -> {
+            Handler handler = new MessageHandler();
+            SendMessage response = new SendMessage();
 
-        handler.handle(update, response);
-        sendMessage(response);
+            handler.handle(update, response);
+            sendMessage(response);
+        });
     }
 
     private void sendMessage(SendMessage message) {
